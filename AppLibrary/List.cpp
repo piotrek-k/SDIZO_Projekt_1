@@ -38,10 +38,48 @@ bool List::findValue(int val)
 
 void List::addElementAtIndex(int index, int value)
 {
+	int indexCounter = this->count - 1;
+	ListMember* nextElem = this->firstValue;
+	while (nextElem) {
+		if (nextElem == NULL || indexCounter < 0) {
+			break;
+		}
+
+		if (indexCounter == index) {
+			ListMember* newElem = (ListMember*)malloc(sizeof(struct ListMember));
+			newElem->value = value;
+			newElem->nextValue = nextElem;
+			newElem->prevValue = nextElem->prevValue;
+			if (nextElem->prevValue != NULL)
+				(nextElem->prevValue)->nextValue = newElem;
+			nextElem->prevValue = newElem;
+			this->count++;
+			return;
+		}
+
+		indexCounter--;
+		nextElem = nextElem->prevValue;
+	}
 }
 
-void List::removeElementAtIndex(int index)
+void List::removeElementByValue(int value)
 {
+	ListMember* nextElem = this->firstValue;
+	while (nextElem) {
+		if (nextElem == NULL) {
+			break;
+		}
+		if (nextElem->value == value) {
+			if (nextElem->prevValue)
+				(nextElem->prevValue)->nextValue = nextElem->nextValue;
+			if (nextElem->nextValue)
+				(nextElem->nextValue)->prevValue = nextElem->prevValue;
+			delete nextElem;
+			this->count--;
+			return;
+		}
+		nextElem = nextElem->prevValue;
+	}
 }
 
 void List::addElement(int value)
@@ -49,8 +87,12 @@ void List::addElement(int value)
 	ListMember* newElem = (ListMember*)malloc(sizeof(struct ListMember));
 	newElem->value = value;
 	if (firstValue != NULL) {
+		//newElem->key = (firstValue->key) + 1;
 		firstValue->nextValue = newElem;
 		newElem->prevValue = firstValue;
+	}
+	else {
+		//newElem->key = 0;
 	}
 	firstValue = newElem;
 
@@ -79,4 +121,9 @@ int* List::toArray()
 int List::getDeclaredSize()
 {
 	return count;
+}
+
+ListMember * List::getFirstValue()
+{
+	return firstValue;
 }
