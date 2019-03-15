@@ -4,11 +4,10 @@
 // menu.cpp : Defines the entry point for the console application.
 //
 
-
 #include<conio.h>
 #include<string>
 #include<iostream>
-#include"Table.h"
+#include "../AppLibrary/Table.h"
 using namespace std;
 
 

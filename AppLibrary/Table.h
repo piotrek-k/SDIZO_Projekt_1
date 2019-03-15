@@ -5,14 +5,14 @@ using namespace std;
 class Table
 {
 	int *tab;
-	int cnt; //ilo�� element�w w tablicy
+	int count; //zadeklarowana w pliku ilość elementów w tablicy
 public:
 
 	Table();
 
 	~Table();
 
-	int loadFromFile(string FileName);
+	void loadFromFile(string FileName);
 
 	bool IsValueInTable(int val);
 
@@ -23,5 +23,9 @@ public:
 	void display();
 
 	void generateTable(int size);
+
+	int getDeclaredSize();
+
+	int getValueAtIndex(int index);
 
 };

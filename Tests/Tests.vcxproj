@@ -50,12 +50,12 @@
     <ClCompile Include="test2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SDIZO_Projekt\SDIZO_Projekt.vcxproj">
-      <Project>{46f9a20b-c156-4f19-961f-c3c72bdda1b6}</Project>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\AppLibrary\AppLibrary.vcxproj">
+      <Project>{e3ea5c41-54c6-4972-8f98-2a85d95e6cfe}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
