@@ -9,24 +9,20 @@ using namespace std;
 
 void List::loadFromFile(std::string FileName)
 {
-	int inputValueIndex = -1;
 	string line;
 	ifstream myfile(FileName);
+	bool firstLine = true;
 	if (myfile.is_open())
 	{
 		while (getline(myfile, line))
 		{
 			int number = stoi(line);
-
-			if (inputValueIndex == -1) {
-				this->count = number;
-				//this->tab = new int[this->count];
+			if (firstLine) {
+				firstLine = false;
 			}
 			else {
-				//this->tab[inputValueIndex] = number;
-				this->addElement(0);
+				this->addElement(number);
 			}
-			inputValueIndex++;
 		}
 		myfile.close();
 	}
@@ -73,7 +69,7 @@ int* List::toArray()
 {
 	int* newArr = new int[count];
 	ListMember* lm = firstValue;
-	for (int a = 0; a < count; a++) {
+	for (int a = count - 1; a >= 0; a--) {
 		newArr[a] = lm->value;
 		lm = lm->prevValue;
 	}
