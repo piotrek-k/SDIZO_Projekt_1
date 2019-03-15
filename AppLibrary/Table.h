@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include <string>
+#include "Structure.h"
 using namespace std;
 
-class Table
+class Table: public Structure
 {
 	int *tab;
 	int count; //zadeklarowana w pliku ilość elementów w tablicy
@@ -15,15 +16,15 @@ public:
 
 	void loadFromFile(string FileName);
 
-	bool IsValueInTable(int val);
+	bool findValue(int val);
 
-	void addValue(int index, int value);
+	void addElement(int index, int value);
 
-	void deleteFromTable(int index);
+	void removeElement(int index);
 
 	void display();
 
-	void generateTable(int size);
+	void generateRandom(int size);
 
 	int getDeclaredSize();
 

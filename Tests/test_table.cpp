@@ -53,7 +53,7 @@ namespace {
 	TEST_F(TableTest, RemovedBeginningOfTable) {
 		int endArray[] = { -2, 5, 99, 124, 1, 2 };
 
-		table.deleteFromTable(0);
+		table.removeElement(0);
 
 		EXPECT_EQ(table.getDeclaredSize(), 6);
 		for (int i = 0; i < table.getDeclaredSize(); i++) {
@@ -64,7 +64,7 @@ namespace {
 	TEST_F(TableTest, AddedBeginningOfTable) {
 		int endArray[] = { 0, 222, -2, 5, 99, 124, 1, 2 };
 
-		table.addValue(1, 222);
+		table.addElement(1, 222);
 
 		EXPECT_EQ(table.getDeclaredSize(), 8);
 		for (int i = 0; i < table.getDeclaredSize(); i++) {

@@ -51,7 +51,7 @@ void menu_table()
 		case '2': //tutaj usuwanie elemenu z tablicy
 			cout << " podaj index:";
 			cin >> index;
-			myTab.deleteFromTable(index);
+			myTab.removeElement(index);
 			myTab.display();
 			break;
 
@@ -61,14 +61,14 @@ void menu_table()
 			cout << " podaj waerto��:";
 			cin >> value;
 
-			myTab.addValue(index, value);
+			myTab.addElement(index, value);
 			myTab.display();
 			break;
 
 		case '4': //tutaj znajdowanie elemetu w tablicy
 			cout << " podaj waerto��:";
 			cin >> value;
-			if (myTab.IsValueInTable(value))
+			if (myTab.findValue(value))
 				cout << "poadana warto�c jest w tablicy";
 			else
 				cout << "poadanej warto�ci NIE ma w tablicy";
@@ -77,7 +77,7 @@ void menu_table()
 		case '5':  //tutaj generowanie  tablicy
 			cout << "Podaj ilo�� element�w tablicy:";
 			cin >> value;
-			myTab.generateTable(value);
+			myTab.generateRandom(value);
 			myTab.display();
 			break;
 

@@ -50,12 +50,12 @@ void Table::loadFromFile(string FileName)
 	}
 }
 
-bool Table::IsValueInTable(int val)
+bool Table::findValue(int val)
 {
 	return false;
 }
 
-void Table::addValue(int index, int value)
+void Table::addElement(int index, int value)
 {
 	int newSize = this->getDeclaredSize() + 1;
 	int* newtab = new int[newSize];
@@ -74,7 +74,7 @@ void Table::addValue(int index, int value)
 	tab = newtab;
 }
 
-void Table::deleteFromTable(int index)
+void Table::removeElement(int index)
 {
 	int newSize = this->getDeclaredSize() - 1;
 	int* newtab = new int[newSize];
@@ -95,7 +95,7 @@ void Table::display()
 {
 }
 
-void Table::generateTable(int size)
+void Table::generateRandom(int size)
 {
 }
 
