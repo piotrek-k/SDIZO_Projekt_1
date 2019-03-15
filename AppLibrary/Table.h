@@ -9,6 +9,7 @@ class Table
 public:
 
 	Table();
+	Table(int length, int * arr);
 
 	~Table();
 

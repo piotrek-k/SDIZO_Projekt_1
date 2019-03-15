@@ -9,6 +9,15 @@ Table::Table()
 {
 }
 
+Table::Table(int length, int * arr)
+{
+	this->count = length;
+	tab = new int[length];
+	for (int i = 0; i < length; i++) {
+		tab[i] = arr[i];
+	}
+}
+
 
 Table::~Table()
 {
@@ -24,11 +33,6 @@ void Table::loadFromFile(string FileName)
 		while (getline(myfile, line))
 		{
 			int number = stoi(line);
-			/*std::istringstream iss(line);
-			iss >> number;
-			if (!iss.good()) {
-				throw "Konwersja tekstu z pliku do wartoœci int nie powiod³a siê";
-			}*/
 
 			if (inputValueIndex == -1) {
 				this->count = number;
@@ -53,10 +57,38 @@ bool Table::IsValueInTable(int val)
 
 void Table::addValue(int index, int value)
 {
+	int newSize = this->getDeclaredSize() + 1;
+	int* newtab = new int[newSize];
+	int oldIndex = 0;
+	for (int a = 0; a < newSize; a++) {
+		if (index == a) {
+			newtab[a] = value;
+		}
+		else {
+			newtab[a] = tab[oldIndex];
+			oldIndex++;
+		}
+	}
+	this->count = newSize;
+
+	tab = newtab;
 }
 
 void Table::deleteFromTable(int index)
 {
+	int newSize = this->getDeclaredSize() - 1;
+	int* newtab = new int[newSize];
+	int oldIndex = 0;
+	for (int a = 0; a < newSize; a++) {
+		if (index == a) {
+			oldIndex++;
+		}
+		newtab[a] = tab[oldIndex];
+		oldIndex++;
+	}
+	this->count = newSize;
+
+	tab = newtab;
 }
 
 void Table::display()
