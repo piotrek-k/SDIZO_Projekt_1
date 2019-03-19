@@ -12,7 +12,7 @@ public:
 	void addElementAtIndex(int index, int value);
 	virtual void removeElementByValue(int value);
 	void addElement(int value);
-	virtual void display();
+	void display(std::ostream & stream);
 	virtual void generateRandom(int size);
 	int* toArray();
 	int getDeclaredSize();

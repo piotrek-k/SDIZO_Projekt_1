@@ -1,8 +1,8 @@
 #pragma once
 
 struct ListMember {
-	int value;
-	int key;
-	ListMember* nextValue;
-	ListMember* prevValue;
+	int value = 0;
+	int key = 0;
+	ListMember* nextValue = nullptr;
+	ListMember* prevValue = nullptr;
 };
