@@ -6,88 +6,96 @@
 
 #include<conio.h>
 #include<string>
-#include<iostream>
+#include <iostream>
+#include <filesystem>
 #include "../AppLibrary/Table.h"
 using namespace std;
 
 
-void displayMenu(string info)
+void displayMenu(string info, bool isLoaded)
 {
 	cout << endl;
 	cout << info << endl;
 	cout << "1.Wczytaj z pliku" << endl;
-	cout << "2.Usun" << endl;
-	cout << "3.Dodaj" << endl;
-	cout << "4.Znajdz" << endl;
-	cout << "5.Utworz losowo" << endl;
-	cout << "6.Wyswietl" << endl;
-	cout << "7.Test (pomiary)" << endl;
+	if (isLoaded) {
+		cout << "2.Usun" << endl;
+		cout << "3.Dodaj" << endl;
+		cout << "4.Znajdz" << endl;
+		cout << "5.Utworz losowo" << endl;
+		cout << "6.Wyswietl" << endl;
+		cout << "7.Test (pomiary)" << endl;
+	}
 	cout << "0.Powrot do menu" << endl;
 	cout << "Podaj opcje:";
 }
 
-
-Table myTab; //myTab mo�e by� dynamiczna, mo�e byc zadeklarowana w manu_table 
-
 void menu_table()
 {
-	char opt;
-	string fileName;
-	int index, value;
-
+	char opt; //wybrana opcja
+	string fileName; //nazwa pliku wpisana przez użytkownika
+	int index, value; // index/wartosc wpisana przez użytkownika
+	Table myTab = Table(); // deklaracja obiektu
+	bool isLoaded = false;
 
 	do {
-		displayMenu("--- TABLICA ---");
-		opt = _getche();
-		cout << endl;
-		switch (opt) {
-		case '1': //tutaj wczytytwanie  tablicy z pliku
-			cout << " Podaj nazw� zbioru:";
-			cin >> fileName;
-			myTab.loadFromFile(fileName);
-			myTab.display();
-			break;
+		try {
+			displayMenu("--- TABLICA ---", isLoaded);
+			opt = _getche();
+			cout << endl;
+			switch (opt) {
+			case '1': //tutaj wczytytwanie  tablicy z pliku
+				cout << " Podaj nazwe zbioru:";
+				cin >> fileName;
+				cout << fileName;
+				myTab.loadFromFile(fileName);
+				myTab.display(cout);
+				isLoaded = true;
+				break;
 
-		case '2': //tutaj usuwanie elemenu z tablicy
-			cout << " podaj index:";
-			cin >> index;
-			myTab.removeElement(index);
-			myTab.display();
-			break;
+			case '2': //tutaj usuwanie elemenu z tablicy
+				cout << " podaj index:";
+				cin >> index;
+				myTab.removeElement(index);
+				myTab.display(cout);
+				break;
 
-		case '3': //tutaj dodawanie elemetu do tablicy
-			cout << " podaj index:";
-			cin >> index;
-			cout << " podaj waerto��:";
-			cin >> value;
+			case '3': //tutaj dodawanie elemetu do tablicy
+				cout << " podaj index:";
+				cin >> index;
+				cout << " podaj wartosc:";
+				cin >> value;
 
-			myTab.addElement(index, value);
-			myTab.display();
-			break;
+				myTab.addElement(index, value);
+				myTab.display(cout);
+				break;
 
-		case '4': //tutaj znajdowanie elemetu w tablicy
-			cout << " podaj waerto��:";
-			cin >> value;
-			if (myTab.findValue(value))
-				cout << "poadana warto�c jest w tablicy";
-			else
-				cout << "poadanej warto�ci NIE ma w tablicy";
-			break;
+			case '4': //tutaj znajdowanie elemetu w tablicy
+				cout << " podaj wartosc:";
+				cin >> value;
+				if (myTab.findValue(value))
+					cout << "podana wartosc jest w tablicy";
+				else
+					cout << "podanej wartosci NIE ma w tablicy";
+				break;
 
-		case '5':  //tutaj generowanie  tablicy
-			cout << "Podaj ilo�� element�w tablicy:";
-			cin >> value;
-			myTab.generateRandom(value);
-			myTab.display();
-			break;
+			case '5':  //tutaj generowanie  tablicy
+				cout << "Podaj ilosc elementow tablicy:";
+				cin >> value;
+				myTab.generateRandom(value);
+				myTab.display(cout);
+				break;
 
-		case '6':  //tutaj wy�wietlanie tablicy
-			myTab.display();
-			break;
+			case '6':  //tutaj wyswietlanie tablicy
+				myTab.display(cout);
+				break;
 
-		case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
-				  // mo�na sobie tu doda� w�asne case'y
-			break;
+			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
+					  // mo�na sobie tu doda� w�asne case'y
+				break;
+			}
+		}
+		catch (const std::exception& e) {
+			cout << "Program zwrocil blad: " << e.what() << endl;
 		}
 
 	} while (opt != '0');

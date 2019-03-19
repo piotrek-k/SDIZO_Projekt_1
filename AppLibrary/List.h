@@ -4,7 +4,7 @@
 class List :
 	public Structure
 {
-	int count;
+	int count = 0;
 	ListMember* firstValue = NULL;
 public:
 	virtual void loadFromFile(std::string FileName);

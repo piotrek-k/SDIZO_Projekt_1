@@ -22,7 +22,7 @@ public:
 
 	void removeElement(int index);
 
-	void display();
+	void display(ostream & stream);
 
 	void generateRandom(int size);
 
