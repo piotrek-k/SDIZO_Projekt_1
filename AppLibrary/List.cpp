@@ -117,7 +117,7 @@ void List::addElement(int value)
 void List::display(ostream& stream)
 {
 	ListMember* lm = firstValue;
-	for (int a = count - 1; a >= 0; a--) {
+	for (int a = 0; a < count - 1; a++) {
 		stream << lm->value << " ";
 		lm = lm->prevValue;
 	}
@@ -127,20 +127,22 @@ void List::generateRandom(int size)
 {
 	srand(time(NULL));
 
-	ListMember newFirstValue = ListMember();
-	newFirstValue.value = rand() % 150 - 50;
-	firstValue = &newFirstValue;
+	ListMember* newFirstValue = (ListMember*)malloc(sizeof(struct ListMember));
+	newFirstValue->value = rand() % 150 - 50;
+	firstValue = newFirstValue;
 
 	ListMember* lastValue = firstValue;
-	for (int a = 0; a < size; a++) {
-		ListMember newValue = ListMember();
-		newFirstValue.value = rand() % 150 - 50;
+	for (int a = 0; a < size-1; a++) {
+		ListMember* newValue = (ListMember*)malloc(sizeof(struct ListMember));
+		newValue->value = rand() % 150 - 50;
 
-		lastValue->prevValue = &newValue;
-		newValue.nextValue = lastValue;
+		lastValue->prevValue = newValue;
+		newValue->nextValue = lastValue;
 
-		lastValue = &newValue;
+		lastValue = newValue;
 	}
+
+	count = size;
 }
 
 int* List::toArray()

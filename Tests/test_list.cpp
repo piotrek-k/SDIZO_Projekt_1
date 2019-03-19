@@ -95,3 +95,23 @@ TEST(ListTest_Standalone, RemoveValueAndConsistencyCheck) {
 	}
 	EXPECT_EQ(lm, beginning);
 }
+
+TEST(ListTest_Standalone, RandomListConsistencyCheck) {
+	List list = List();
+	list.generateRandom(6);
+	int* generatedArr = list.toArray();
+
+	EXPECT_EQ(list.getDeclaredSize(), 6);
+
+	// CONSISTENCY CHECK
+	ListMember* lm = list.getFirstValue();
+	ListMember* beginning = lm;
+	for (int a = list.getDeclaredSize() - 1; a > 0; a--) {
+		if (lm->prevValue)
+			lm = lm->prevValue;
+	}
+	for (int a = 0; a < list.getDeclaredSize() - 1; a++) {
+		lm = lm->nextValue;
+	}
+	EXPECT_EQ(lm, beginning);
+}
