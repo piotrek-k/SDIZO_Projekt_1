@@ -14,6 +14,10 @@ void List::loadFromFile(std::string FileName)
 	string line;
 	ifstream myfile(FileName);
 	bool firstLine = true;
+
+	firstValue = nullptr;
+	count = 0;
+
 	if (myfile.is_open())
 	{
 		try {
@@ -82,22 +86,26 @@ void List::addElementAtIndex(int index, int value)
 
 void List::removeElementByValue(int value)
 {
-	ListMember* nextElem = this->firstValue;
+	ListMember* elem = this->firstValue;
 	for (int a = 0; a < getDeclaredSize(); a++) {
-		if (nextElem == NULL || nextElem == nullptr) {
+		if (elem == NULL || elem == nullptr) {
 			break;
 		}
 
-		if (nextElem->value == value) {
-			if (nextElem->prevValue && nextElem->nextValue) {
-				(nextElem->prevValue)->nextValue = nextElem->nextValue;
-				(nextElem->nextValue)->prevValue = nextElem->prevValue;
-			}
-			delete nextElem;
+		if (elem->value == value) {
+			if (elem->prevValue != nullptr && a != getDeclaredSize()-1)
+				elem->prevValue->nextValue = elem->nextValue;
+			if (elem->prevValue != nullptr && a != 0)
+				elem->nextValue->prevValue = elem->prevValue;
+
+			if (elem == this->firstValue)
+				this->firstValue = elem->prevValue;
+
+			delete elem;
 			this->count--;
 			return;
 		}
-		nextElem = nextElem->prevValue;
+		elem = elem->prevValue;
 	}
 }
 

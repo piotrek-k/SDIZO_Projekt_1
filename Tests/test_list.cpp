@@ -65,7 +65,7 @@ TEST(ListTest_Standalone, AddedValuesAtIndex) {
 }
 
 TEST(ListTest_Standalone, RemoveValueAndConsistencyCheck) {
-	int endArray[] = { 5, 88, 234, -22 };
+	int endArray[] = { 88, 234, -22 };
 	List list = List();
 	list.addElement(5);
 	list.addElement(10);
@@ -76,9 +76,10 @@ TEST(ListTest_Standalone, RemoveValueAndConsistencyCheck) {
 	list.removeElementByValue(10);
 	list.removeElementByValue(10);
 	list.removeElementByValue(10);
+	list.removeElementByValue(5);
 	int* generatedArr = list.toArray();
 
-	EXPECT_EQ(list.getDeclaredSize(), 4);
+	EXPECT_EQ(list.getDeclaredSize(), 3);
 	for (int i = 0; i < list.getDeclaredSize(); i++) {
 		EXPECT_EQ(generatedArr[i], endArray[i]);
 	}
