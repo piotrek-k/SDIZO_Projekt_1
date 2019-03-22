@@ -4,6 +4,8 @@
 #include <fstream>
 #include <algorithm>
 #include <math.h>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 using namespace std;
 
@@ -136,11 +138,25 @@ string Heap::convertToString()
 
 void Heap::generateRandom(int size)
 {
+	srand(time(NULL));
+	int* newArray = new int[size];
+	for (int a = 0; a < size; a++) {
+		newArray[a] = rand() % 150 - 50;
+	}
+	this->populateFromArray(newArray, size);
 }
 
 int * Heap::toArray()
 {
 	return tab;
+}
+
+void Heap::display(ostream & stream)
+{
+	stream << "Wyswietlanie kopca. Zadeklarowana wielkosc: " << getDeclaredSize() << endl;
+	for (int a = 0; a < getDeclaredSize(); a++) {
+		stream << tab[a] << " ";
+	}
 }
 
 int Heap::getDeclaredSize()

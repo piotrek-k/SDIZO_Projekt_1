@@ -1,5 +1,5 @@
 #include<string>
-
+using namespace std;
 #pragma once
 class Heap
 {
@@ -23,6 +23,7 @@ public:
 	std::string convertToString();
 	void generateRandom(int size);
 	int* toArray();
+	void display(ostream & stream);
 
 	int getDeclaredSize();
 	void changeDeclaredSize(int newCount);

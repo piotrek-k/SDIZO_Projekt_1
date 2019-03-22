@@ -10,6 +10,7 @@
 #include <filesystem>
 #include "../AppLibrary/Table.h"
 #include "../AppLibrary/List.h"
+#include "../AppLibrary/Heap.h"
 using namespace std;
 
 
@@ -41,13 +42,13 @@ void menu_table()
 	do {
 		try {
 			displayMenu("--- TABLICA ---", isLoaded);
-			opt = _getche();
+			//opt = _getche();
+			cin >> opt;
 			cout << endl;
 			switch (opt) {
 			case '1': //tutaj wczytytwanie  tablicy z pliku
 				cout << " Podaj nazwe zbioru:";
 				cin >> fileName;
-				cout << fileName;
 				myTab.loadFromFile(fileName);
 				myTab.display(cout);
 				isLoaded = true;
@@ -120,7 +121,6 @@ void menu_list()
 			case '1': //tutaj wczytytwanie  tablicy z pliku
 				cout << " Podaj nazwe zbioru:";
 				cin >> fileName;
-				cout << fileName;
 				myTab.loadFromFile(fileName);
 				myTab.display(cout);
 				isLoaded = true;
@@ -177,7 +177,72 @@ void menu_list()
 
 void menu_heap()
 {
-	//analogicznie jak menu_table()
+	char opt; //wybrana opcja
+	string fileName; //nazwa pliku wpisana przez użytkownika
+	int index, value; // index/wartosc wpisana przez użytkownika
+	Heap myTab = Heap(); // deklaracja obiektu
+	bool isLoaded = false;
+
+	do {
+		try {
+			displayMenu("--- KOPIEC ---", isLoaded);
+			//opt = _getche();
+			cin >> opt;
+			cout << endl;
+			switch (opt) {
+			case '1': //tutaj wczytytwanie  kopca z pliku
+				cout << " Podaj nazwe zbioru:";
+				cin >> fileName;
+				myTab.loadFromFile(fileName);
+				myTab.display(cout);
+				isLoaded = true;
+				break;
+
+			case '2': //tutaj usuwanie elemenu z kopca
+				cout << " podaj index:";
+				cin >> index;
+				myTab.removeElementAtIndex(index);
+				myTab.display(cout);
+				break;
+
+			case '3': //tutaj dodawanie elemetu do kopca
+				cout << " podaj wartosc:";
+				cin >> value;
+
+				myTab.addElement(value);
+				myTab.display(cout);
+				break;
+
+			case '4': //tutaj znajdowanie elemetu w tablicy
+				cout << " podaj wartosc:";
+				cin >> value;
+				if (myTab.findValue(value))
+					cout << "podana wartosc jest w kopcu";
+				else
+					cout << "podanej wartosci NIE ma w kopcu";
+				break;
+
+			case '5':  //tutaj generowanie  tablicy
+				cout << "Podaj ilosc elementow kopca:";
+				cin >> value;
+				myTab.generateRandom(value);
+				myTab.display(cout);
+				break;
+
+			case '6':  //tutaj wyswietlanie tablicy
+				myTab.display(cout);
+				break;
+
+			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
+					  // mo�na sobie tu doda� w�asne case'y
+				break;
+			}
+		}
+		catch (const std::exception& e) {
+			cout << "Program zwrocil blad: " << e.what() << endl;
+		}
+
+	} while (opt != '0');
 }
 
 int main(int argc, char* argv[])
@@ -192,7 +257,8 @@ int main(int argc, char* argv[])
 		cout << "3.Kopiec" << endl;
 		cout << "0.Wyjscie" << endl;
 		cout << "Podaj opcje:";
-		option = _getche();
+		//option = _getche();
+		cin >> option;
 		cout << endl;
 
 		switch (option) {

@@ -124,6 +124,7 @@ void List::addElement(int value)
 
 void List::display(ostream& stream)
 {
+	stream << "Wyswietlanie listy. Zadeklarowana wielkosc: " << getDeclaredSize() << endl;
 	ListMember* lm = firstValue;
 	for (int a = 0; a < count - 1; a++) {
 		stream << lm->value << " ";
