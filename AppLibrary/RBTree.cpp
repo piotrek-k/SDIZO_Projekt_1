@@ -39,7 +39,7 @@ void RBTree::leftRotate(RBMember * node)
 {
 	RBMember* y = node->rightNode;
 	node->rightNode = y->leftNode;
-	
+
 	if (y->leftNode != NULL) {
 		y->leftNode->parentNode = node;
 	}
@@ -56,6 +56,40 @@ void RBTree::leftRotate(RBMember * node)
 
 	y->leftNode = node;
 	node->parentNode = y;
+}
+
+void RBTree::rightRotate(RBMember * y)
+{
+	//zgodnie z rysunkiem, Cormen strona 306
+
+	RBMember* x = y->leftNode;
+
+	//alpha
+	//zostaje
+
+	//beta
+	y->leftNode = x->rightNode;
+	x->rightNode->parentNode = y;
+
+	//gamma
+	//zostaje
+
+	if (y->parentNode->isNotNull()) {
+		x->parentNode = y->parentNode;
+	}
+	else {
+		x->parentNode = new RBMember();
+		root = x;
+	}
+
+	if (y->parentNode->rightNode == y) {
+		y->parentNode->rightNode = x;
+	}
+	else {
+		y->parentNode->leftNode = x;
+	}
+	x->rightNode = y;
+
 }
 
 RBTree::RBTree()
