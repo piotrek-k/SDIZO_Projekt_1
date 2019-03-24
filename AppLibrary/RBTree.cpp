@@ -4,7 +4,7 @@
 
 RBMember* RBTree::treeInsert(int value)
 {
-	RBMember* newElem = (RBMember*)malloc(sizeof(struct RBMember));
+	RBMember* newElem = new RBMember();
 	newElem->build();
 	newElem->value = value;
 
@@ -105,65 +105,71 @@ void RBTree::rbInsert(int value)
 {
 	RBMember* x = treeInsert(value);
 	x->color = Red;
-	RBMember* y = NULL;
+	RBMember* y = new RBMember();
 
 	// dodaliœmy wêze³ w kolorze czerwonym. trzeba upewniæ siê, ¿e jego rodzic nie jest tego samego koloru
 	while (x != root && x->parentNode->color == Red) {
-		if (x->parentNode == x->parentNode->parentNode->leftNode) {
-			// rodzic nowego wêz³a jest lewym wêz³em
+		if (x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
+			if (x->parentNode == x->parentNode->parentNode->leftNode) {
+				// rodzic nowego wêz³a jest lewym wêz³em
 
-			y = x->parentNode->parentNode->rightNode; //pobierz prawy odpowiednik rodzica
-			if (y->color == Red) {
-				//prawy odpowiednik rodzica te¿ jest czerwony
+				y = x->parentNode->parentNode->rightNode; //pobierz prawy odpowiednik rodzica
+				if (y->color == Red) {
+					//prawy odpowiednik rodzica te¿ jest czerwony
 
-				x->parentNode->color = Black; // zmieñ rodzica na czarnego
-				y->color = Black; // zmieñ prawy odpowiednik rodzica na czarny
-				x->parentNode->parentNode->color = Red;
-				x = x->parentNode->parentNode;
-			}
-			else if (x == x->parentNode->rightNode) {
-				//rodzic i jego odpow. maj¹ inne kolory
-				//x jest prawym wêz³em
+					x->parentNode->color = Black; // zmieñ rodzica na czarnego
+					y->color = Black; // zmieñ prawy odpowiednik rodzica na czarny
+					x->parentNode->parentNode->color = Red;
+					x = x->parentNode->parentNode;
+				}
+				else if (x == x->parentNode->rightNode) {
+					//rodzic i jego odpow. maj¹ inne kolory
+					//x jest prawym wêz³em
 
-				//przyp 2
-				x = x->parentNode;
-				//Left rotate (T, x)
-			}
-			//rodzic i jego odpow. maj¹ inne kolory
-			//x jest lewym wêz³em
-
-			//przyp 3
-			x->parentNode->color = Black;
-			x->parentNode->parentNode->color = Red;
-			//Right rotate (T, x.parent.parent)
-		}
-		else {
-			// rodzic nowego wêz³a jest prawym wêz³em
-
-			y = x->parentNode->parentNode->leftNode; //pobierz lewy odpowiednik rodzica
-			if (y->color == Red) {
-				//lewy odpowiednik rodzica te¿ jest czerwony
-
-				x->parentNode->color = Black; // zmieñ rodzica na czarnego
-				y->color = Black; // zmieñ lewy odpowiednik rodzica na czarny
-				x->parentNode->parentNode->color = Red;
-				x = x->parentNode->parentNode;
-			}
-			else if (x == x->parentNode->leftNode) {
+					//przyp 2
+					x = x->parentNode;
+					leftRotate(x);
+				}
 				//rodzic i jego odpow. maj¹ inne kolory
 				//x jest lewym wêz³em
 
-				//przyp 2
-				x = x->parentNode;
-				//Right rotate?
+				//przyp 3
+				if (x != root) {
+					x->parentNode->color = Black;
+				}
+				if(x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
+					x->parentNode->parentNode->color = Red;
+					rightRotate(x->parentNode->parentNode);
+				}
 			}
-			//rodzic i jego odpow. maj¹ inne kolory
-			//x jest prawym wêz³em
+			else {
+				// rodzic nowego wêz³a jest prawym wêz³em
 
-			//przyp 3
-			x->parentNode->color = Black;
-			x->parentNode->parentNode->color = Red;
-			//Left rotate ?
+				y = x->parentNode->parentNode->leftNode; //pobierz lewy odpowiednik rodzica
+				if (y != nullptr && y->isNotNull() && y->color == Red) {
+					//lewy odpowiednik rodzica te¿ jest czerwony
+
+					x->parentNode->color = Black; // zmieñ rodzica na czarnego
+					y->color = Black; // zmieñ lewy odpowiednik rodzica na czarny
+					x->parentNode->parentNode->color = Red;
+					x = x->parentNode->parentNode;
+				}
+				else if (x == x->parentNode->leftNode) {
+					//rodzic i jego odpow. maj¹ inne kolory
+					//x jest lewym wêz³em
+
+					//przyp 2
+					x = x->parentNode;
+					//Right rotate?
+				}
+				//rodzic i jego odpow. maj¹ inne kolory
+				//x jest prawym wêz³em
+
+				//przyp 3
+				x->parentNode->color = Black;
+				x->parentNode->parentNode->color = Red;
+				//Left rotate ?
+			}
 		}
 		root->color = Black;
 	}

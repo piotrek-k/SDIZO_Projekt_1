@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "../AppLibrary/RBTree.h"
 
-RBTree* buildTreeFromBook() {
+RBTree* buildBSTTreeFromBook() {
 	RBTree* rb = new RBTree();
 	rb->treeInsert(7);
 	rb->treeInsert(4);
@@ -17,6 +17,19 @@ RBTree* buildTreeFromBook() {
 	rb->treeInsert(17);
 	rb->treeInsert(22);
 	rb->treeInsert(20);
+	return rb;
+}
+
+RBTree* buildRBTreeFromBook() {
+	RBTree* rb = new RBTree();
+	rb->rbInsert(11);
+	rb->rbInsert(2);
+	rb->rbInsert(14);
+	rb->rbInsert(1);
+	rb->rbInsert(7);
+	rb->rbInsert(15);
+	rb->rbInsert(5);
+	rb->rbInsert(8);
 	return rb;
 }
 
@@ -41,7 +54,7 @@ TEST(RBTreeTest, BST_Insertion) {
 }
 
 TEST(RBTreeTest, BuildingSampleTree) {
-	RBTree* rb = buildTreeFromBook();
+	RBTree* rb = buildBSTTreeFromBook();
 
 	RBMember* x = rb->root;
 	RBMember* y = rb->root;
@@ -61,7 +74,7 @@ TEST(RBTreeTest, BuildingSampleTree) {
 }
 
 TEST(RBTreeTest, LeftRotate) {
-	RBTree* rb = buildTreeFromBook();
+	RBTree* rb = buildBSTTreeFromBook();
 	
 	RBMember* movePoint = rb->root->rightNode;
 	rb->leftRotate(movePoint);
@@ -79,7 +92,7 @@ TEST(RBTreeTest, LeftRotate) {
 }
 
 TEST(RBTreeTest, RightRotate) {
-	RBTree* rb = buildTreeFromBook();
+	RBTree* rb = buildBSTTreeFromBook();
 
 	RBMember* movePoint = rb->root->rightNode->rightNode;
 	rb->rightRotate(movePoint);
@@ -103,4 +116,14 @@ TEST(RBTreeTest, RightRotate) {
 	ASSERT_EQ(x->value, 18);
 	x = x->leftNode;
 	ASSERT_EQ(x->value, 17);
+}
+
+TEST(RBTreeTest, RBInsert) {
+	RBTree* rb = buildRBTreeFromBook();
+
+	rb->rbInsert(4);
+
+	ASSERT_EQ(rb->root->value, 7);
+	ASSERT_EQ(rb->root->leftNode->value, 2);
+	ASSERT_EQ(rb->root->rightNode->value, 11);
 }
