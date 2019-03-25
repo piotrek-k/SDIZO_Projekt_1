@@ -206,3 +206,111 @@ void RBTree::rbInsert(int value)
 	}
 	root->color = Black;
 }
+
+RBMember* RBTree::removeElement(RBMember* z)
+{
+	// algorytm zamiast fizycznie usuwaæ wêze³
+	// usuwa jego potomka, i przypisuje sobie jego cechy
+
+	RBMember* x;
+	RBMember* y;
+	if (z->leftNode->isNull() || z->rightNode->isNull()) {
+		y = z;
+	}
+	else {
+		y = treeSuccessor(z);
+	}
+
+	if (y->leftNode->isNotNull()) {
+		x = y->leftNode;
+	}
+	else {
+		x = y->rightNode;
+	}
+	x->parentNode = y->parentNode;
+
+	if (y->parentNode->isNull()) {
+		root = x;
+	}
+	else if (y == y->parentNode->leftNode) {
+		y->parentNode->leftNode = x;
+	}
+	else {
+		y->parentNode->rightNode = x;
+	}
+
+	if (y != z) {
+		z->value = y->value;
+	}
+
+	if (y->color == Black) {
+		// jeœli y jest czarny, mamy dwa kolory czerwone pod rz¹d
+		RBDeleteFixup(x);
+	}
+
+	return y;
+}
+
+void RBTree::RBDeleteFixup(RBMember * x)
+{
+	// przywrócenie w³asnoœci drzewa po usuniêciu elementu
+
+	RBMember* w;
+	while (x != root && x->color == Black) {
+		if (x == x->parentNode->leftNode) {
+			w = x->parentNode->rightNode;
+
+			if (w->color == Red) {
+				w->color = Black;
+				x->parentNode->color = Red;
+				leftRotate(x->parentNode);
+				w = x->parentNode->rightNode;
+			}
+
+			if (w->leftNode->color == Black && w->rightNode->color == Black) {
+				w->color = Red;
+				x = x->parentNode;
+			}
+			else if (w->rightNode->color == Black) {
+				w->leftNode->color = Black;
+				w->color = Red;
+				rightRotate(w);
+				w = x->parentNode->rightNode;
+			}
+
+			w->color = x->parentNode->color;
+			x->parentNode->color = Black;
+			w->rightNode->color = Black;
+			leftRotate(x->parentNode);
+			x = root;
+		}
+		else {
+			w = x->parentNode->leftNode;
+
+			if (w->color == Red) {
+				w->color = Black;
+				x->parentNode->color = Red;
+				rightRotate(x->parentNode);
+				w = x->parentNode->leftNode;
+			}
+
+			if (w->rightNode->color == Black && w->leftNode->color == Black) {
+				w->color = Red;
+				x = x->parentNode;
+			}
+			else if (w->leftNode->color == Black) {
+				w->rightNode->color = Black;
+				w->color = Red;
+				leftRotate(w);
+				w = x->parentNode->leftNode;
+			}
+
+			w->color = x->parentNode->color;
+			x->parentNode->color = Black;
+			w->leftNode->color = Black;
+			rightRotate(x->parentNode);
+			x = root;
+		}
+
+	}
+}

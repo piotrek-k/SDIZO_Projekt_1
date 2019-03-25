@@ -16,7 +16,8 @@ public:
 	void loadFromFile(std::string FileName);
 	void findValue(int value);
 	void rbInsert(int value);
-	void removeElement(int value);
+	RBMember* removeElement(RBMember* value);
+	void RBDeleteFixup(RBMember* x);
 	void display(std::ostream & stream);
 };
 
