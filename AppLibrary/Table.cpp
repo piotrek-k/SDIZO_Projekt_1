@@ -2,7 +2,6 @@
 #include "Table.h"
 #include <fstream>
 #include <sstream>
-#include "StructureExcepion.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 

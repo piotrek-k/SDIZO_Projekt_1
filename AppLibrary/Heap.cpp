@@ -9,6 +9,10 @@
 
 using namespace std;
 
+/// <summary>
+/// Generuje kopiec z danych zwartych w pliku
+/// </summary>
+/// <param name="FileName">œcie¿ka do pliku</param>
 void Heap::loadFromFile(std::string FileName)
 {
 	string line;

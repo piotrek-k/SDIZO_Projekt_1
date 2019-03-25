@@ -1,9 +1,8 @@
 ﻿#pragma once
 #include <string>
-#include "Structure.h"
 using namespace std;
 
-class Table: public Structure
+class Table
 {
 	int *tab;
 	int count; //zadeklarowana w pliku ilość elementów w tablicy

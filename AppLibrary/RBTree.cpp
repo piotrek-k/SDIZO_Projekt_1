@@ -118,6 +118,10 @@ RBMember * RBTree::treeSuccessor(RBMember * node)
 	return y;
 }
 
+void RBTree::loadFromFile(std::string FileName)
+{
+}
+
 RBTree::RBTree()
 {
 }
@@ -349,4 +353,8 @@ void RBTree::RBDeleteFixup(RBMember * x)
 		}
 
 	}
+}
+
+void RBTree::display(std::ostream & stream)
+{
 }

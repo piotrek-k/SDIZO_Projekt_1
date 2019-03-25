@@ -156,8 +156,6 @@
     <ClInclude Include="RBMember.h" />
     <ClInclude Include="RBTree.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Structure.h" />
-    <ClInclude Include="StructureExcepion.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -172,8 +170,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Structure.cpp" />
-    <ClCompile Include="StructureExcepion.cpp" />
     <ClCompile Include="Table.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

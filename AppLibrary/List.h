@@ -1,8 +1,10 @@
 #pragma once
-#include "Structure.h"
 #include "ListMember.h"
-class List :
-	public Structure
+#include <string>
+
+using namespace std;
+
+class List
 {
 	int count = 0;
 	ListMember* firstValue = NULL;

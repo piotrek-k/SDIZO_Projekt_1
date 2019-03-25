@@ -13,6 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Heap">
+      <UniqueIdentifier>{e0b65112-201d-4751-a7b8-a09ef56d0c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\List">
+      <UniqueIdentifier>{794a7158-5fbe-4686-ae3e-3c9cca63e027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RBTree">
+      <UniqueIdentifier>{83c7daa6-04af-4d92-9b8b-f1d97dcbc98c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Table">
+      <UniqueIdentifier>{976892fb-6b31-4030-bc4b-7e3e8e1248d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Heap">
+      <UniqueIdentifier>{6008f153-69de-4e34-961d-50bfec9e7ff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\List">
+      <UniqueIdentifier>{66a8140b-bacb-46d0-aa68-e2789e400824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RBTree">
+      <UniqueIdentifier>{acefb294-6a1f-4615-b16d-5da5c6644cce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Table">
+      <UniqueIdentifier>{c39851ac-48ef-4460-8650-7ac5da3e0174}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -21,55 +45,43 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Table.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Structure.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Heap.h">
+      <Filter>Header Files\Heap</Filter>
     </ClInclude>
     <ClInclude Include="List.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\List</Filter>
     </ClInclude>
     <ClInclude Include="ListMember.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Heap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StructureExcepion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RBTree.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\List</Filter>
     </ClInclude>
     <ClInclude Include="RBMember.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\RBTree</Filter>
+    </ClInclude>
+    <ClInclude Include="RBTree.h">
+      <Filter>Header Files\RBTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Header Files\Table</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Table.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Structure.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Heap.cpp">
+      <Filter>Source Files\Heap</Filter>
     </ClCompile>
     <ClCompile Include="List.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Heap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StructureExcepion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RBTree.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\List</Filter>
     </ClCompile>
     <ClCompile Include="RBMember.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\RBTree</Filter>
+    </ClCompile>
+    <ClCompile Include="RBTree.cpp">
+      <Filter>Source Files\RBTree</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Source Files\Table</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
