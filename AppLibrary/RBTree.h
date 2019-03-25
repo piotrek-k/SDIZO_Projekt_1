@@ -14,7 +14,7 @@ public:
 	RBTree();
 	~RBTree();
 	void loadFromFile(std::string FileName);
-	void findValue(int value);
+	RBMember* findValue(int value);
 	void rbInsert(int value);
 	RBMember* removeElement(RBMember* value);
 	void RBDeleteFixup(RBMember* x);

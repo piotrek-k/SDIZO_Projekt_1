@@ -147,3 +147,49 @@ TEST(RBTreeTest, treeSuccessor) {
 
 	ASSERT_EQ(m->value, 11);
 }
+
+bool treeCorrect(RBMember* m) {
+	if (m->leftNode->isNull() && m->rightNode->isNull()) {
+		return true;
+	}
+	if (m->color == m->leftNode->color || m->color == m->rightNode->color) {
+		return false;
+	}
+	return treeCorrect(m->leftNode) && treeCorrect(m->rightNode);
+}
+
+TEST(RBTreeTest, deleteElement) {
+	RBTree* rb = buildRBTreeFromBook();
+
+	//sprawdz czy usuwany element istnieje
+	RBMember* objToDel1 = rb->findValue(11);
+	RBMember* objToDel2 = rb->findValue(7);
+	RBMember* objToDel3 = rb->findValue(5);
+	ASSERT_TRUE(objToDel1 != NULL);
+	ASSERT_TRUE(objToDel2 != NULL);
+	ASSERT_TRUE(objToDel3 != NULL);
+	//rb->removeElement(jakis_element);
+	rb->removeElement(objToDel1);
+	rb->removeElement(objToDel2);
+	rb->removeElement(objToDel3);
+	//sprobuj znowu znalezc ten element
+	objToDel1 = rb->findValue(11);
+	objToDel2 = rb->findValue(7);
+	objToDel3 = rb->findValue(5);
+	EXPECT_TRUE(objToDel1 == NULL);
+	EXPECT_TRUE(objToDel2 == NULL);
+	EXPECT_TRUE(objToDel3 == NULL);
+	//sprawdz czy wlasnosci zachowane
+	EXPECT_TRUE(treeCorrect(rb->root));
+}
+
+TEST(RBTreeTest, findValue) {
+	RBTree* rb = buildRBTreeFromBook();
+
+	EXPECT_TRUE(rb->findValue(11) != NULL);
+	EXPECT_TRUE(rb->findValue(14) != NULL);
+	EXPECT_TRUE(rb->findValue(7) != NULL);
+	EXPECT_TRUE(rb->findValue(5) != NULL);
+
+	EXPECT_TRUE(rb->findValue(9) == NULL);
+}

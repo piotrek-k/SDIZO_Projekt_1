@@ -125,6 +125,23 @@ RBTree::~RBTree()
 {
 }
 
+RBMember* RBTree::findValue(int value)
+{
+	RBMember* x = root;
+	while (x->isNotNull()) {
+		if (x->value == value) {
+			return x;
+		}
+		if (x->value < value) {
+			x = x->rightNode;
+		}
+		if (x->value > value) {
+			x = x->leftNode;
+		}
+	}
+	return NULL;
+}
+
 void RBTree::rbInsert(int value)
 {
 	RBMember* x = treeInsert(value);
