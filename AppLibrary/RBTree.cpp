@@ -129,24 +129,26 @@ void RBTree::rbInsert(int value)
 					//przyp 2
 					x = x->parentNode;
 					leftRotate(x);
-				}
-				//rodzic i jego odpow. maj¹ inne kolory
-				//x jest lewym wêz³em
 
-				//przyp 3
-				if (x != root) {
-					x->parentNode->color = Black;
+					//rodzic i jego odpow. maj¹ inne kolory
+					//x jest lewym wêz³em
+
+					//przyp 3
+					if (x != root) {
+						x->parentNode->color = Black;
+					}
+					if (x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
+						x->parentNode->parentNode->color = Red;
+						rightRotate(x->parentNode->parentNode);
+					}
 				}
-				if(x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
-					x->parentNode->parentNode->color = Red;
-					rightRotate(x->parentNode->parentNode);
-				}
+
 			}
 			else {
 				// rodzic nowego wêz³a jest prawym wêz³em
 
 				y = x->parentNode->parentNode->leftNode; //pobierz lewy odpowiednik rodzica
-				if (y != nullptr && y->isNotNull() && y->color == Red) {
+				if (y->color == Red) {
 					//lewy odpowiednik rodzica te¿ jest czerwony
 
 					x->parentNode->color = Black; // zmieñ rodzica na czarnego
@@ -160,17 +162,23 @@ void RBTree::rbInsert(int value)
 
 					//przyp 2
 					x = x->parentNode;
-					//Right rotate?
-				}
-				//rodzic i jego odpow. maj¹ inne kolory
-				//x jest prawym wêz³em
+					rightRotate(x);
 
-				//przyp 3
-				x->parentNode->color = Black;
-				x->parentNode->parentNode->color = Red;
-				//Left rotate ?
+					//rodzic i jego odpow. maj¹ inne kolory
+					//x jest prawym wêz³em
+
+					//przyp 3
+					if (x != root) {
+						x->parentNode->color = Black;
+					}
+					if (x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
+						x->parentNode->parentNode->color = Red;
+						leftRotate(x->parentNode->parentNode);
+					}
+				}
+				
 			}
 		}
-		root->color = Black;
 	}
+	root->color = Black;
 }
