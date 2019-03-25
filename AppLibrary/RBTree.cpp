@@ -92,6 +92,30 @@ void RBTree::rightRotate(RBMember * y)
 
 }
 
+RBMember* RBTree::treeMinimum(RBMember * node)
+{
+	while (node->leftNode->isNotNull()) {
+		node = node->leftNode;
+	}
+	return node;
+}
+
+RBMember * RBTree::treeSuccessor(RBMember * node)
+{
+	// jeœli wêze³ ma prawego potomka, znajdŸ najmniejsz¹ wartoœæ zaczynaj¹c od niego
+	if (node->rightNode->isNotNull()) {
+		return treeMinimum(node->rightNode);
+	}
+	// znajdŸ pierwszy przypadek rodzica, który jest lewym potomkiem
+	// dojdziemy wtedy do pierwszego wiêkszego wêz³a
+	RBMember* y = node->parentNode;
+	while (y->isNotNull() && node == y->rightNode) {
+		node = y;
+		y = y->parentNode;
+	}
+	return y;
+}
+
 RBTree::RBTree()
 {
 }

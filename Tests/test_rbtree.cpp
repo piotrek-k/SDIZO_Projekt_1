@@ -21,6 +21,7 @@ RBTree* buildBSTTreeFromBook() {
 }
 
 RBTree* buildRBTreeFromBook() {
+	//Cormen 310
 	RBTree* rb = new RBTree();
 	rb->rbInsert(11);
 	rb->rbInsert(2);
@@ -126,4 +127,23 @@ TEST(RBTreeTest, RBInsert) {
 	ASSERT_EQ(rb->root->value, 7);
 	ASSERT_EQ(rb->root->leftNode->value, 2);
 	ASSERT_EQ(rb->root->rightNode->value, 11);
+}
+
+TEST(RBTreeTest, treeMinimum) {
+	RBTree* rb = buildRBTreeFromBook();
+
+	RBMember* m = rb->treeMinimum(rb->root);
+
+	ASSERT_EQ(m->value, 1);
+}
+
+TEST(RBTreeTest, treeSuccessor) {
+	RBTree* rb = buildRBTreeFromBook();
+
+	RBMember* startPoint = rb->root->leftNode->rightNode->rightNode;
+	RBMember* m = rb->treeSuccessor(startPoint);
+
+	ASSERT_EQ(startPoint->value, 8);
+
+	ASSERT_EQ(m->value, 11);
 }

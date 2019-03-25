@@ -9,6 +9,8 @@ public:
 	RBMember* treeInsert(int value);
 	void leftRotate(RBMember* node);
 	void rightRotate(RBMember* node);
+	RBMember* treeMinimum(RBMember* node);
+	RBMember* treeSuccessor(RBMember* node);
 	RBTree();
 	~RBTree();
 	void loadFromFile(std::string FileName);
