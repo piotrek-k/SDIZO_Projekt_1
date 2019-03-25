@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "RBTree.h"
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 
 RBMember* RBTree::treeInsert(int value)
@@ -125,6 +127,15 @@ RBTree::~RBTree()
 {
 }
 
+void RBTree::generateRandom(int size)
+{
+	srand(time(NULL));
+	root = new RBMember();
+	for (int a = 0; a < size; a++) {
+		this->rbInsert(rand() % 150 - 50);
+	}
+}
+
 RBMember* RBTree::findValue(int value)
 {
 	RBMember* x = root;
@@ -224,6 +235,12 @@ void RBTree::rbInsert(int value)
 	root->color = Black;
 }
 
+void RBTree::removeElement(int value)
+{
+	RBMember* elem = this->findValue(value);
+	removeElement(elem);
+}
+
 RBMember* RBTree::removeElement(RBMember* z)
 {
 	// algorytm zamiast fizycznie usuwaæ wêze³
@@ -268,9 +285,11 @@ RBMember* RBTree::removeElement(RBMember* z)
 	return y;
 }
 
+
 void RBTree::RBDeleteFixup(RBMember * x)
 {
 	// przywrócenie w³asnoœci drzewa po usuniêciu elementu
+	// cormen strona 316
 
 	RBMember* w;
 	while (x != root && x->color == Black) {

@@ -11,6 +11,7 @@
 #include "../AppLibrary/Table.h"
 #include "../AppLibrary/List.h"
 #include "../AppLibrary/Heap.h"
+#include "../AppLibrary/RBTree.h"
 using namespace std;
 
 
@@ -231,6 +232,75 @@ void menu_heap()
 
 			case '6':  //tutaj wyswietlanie tablicy
 				myTab.display(cout);
+				break;
+
+			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
+					  // mo�na sobie tu doda� w�asne case'y
+				break;
+			}
+		}
+		catch (const std::exception& e) {
+			cout << "Program zwrocil blad: " << e.what() << endl;
+		}
+
+	} while (opt != '0');
+}
+
+void menu_rbtree()
+{
+	char opt; //wybrana opcja
+	string fileName; //nazwa pliku wpisana przez użytkownika
+	int index, value; // index/wartosc wpisana przez użytkownika
+	RBTree rbtree = RBTree(); // deklaracja obiektu
+	bool isLoaded = false;
+
+	do {
+		try {
+			displayMenu("--- DRZEWO CZERWONO-CZARNE ---", isLoaded);
+			//opt = _getche();
+			cin >> opt;
+			cout << endl;
+			switch (opt) {
+			case '1': //tutaj wczytytwanie  kopca z pliku
+				cout << " Podaj nazwe zbioru:";
+				cin >> fileName;
+				rbtree.loadFromFile(fileName);
+				rbtree.display(cout);
+				isLoaded = true;
+				break;
+
+			case '2': //tutaj usuwanie elemenu z kopca
+				cout << " podaj index:";
+				cin >> index;
+				rbtree.removeElement(index);
+				rbtree.display(cout);
+				break;
+
+			case '3': //tutaj dodawanie elemetu do kopca
+				cout << " podaj wartosc:";
+				cin >> value;
+				rbtree.rbInsert(value);
+				rbtree.display(cout);
+				break;
+
+			case '4': //tutaj znajdowanie elemetu w tablicy
+				cout << " podaj wartosc:";
+				cin >> value;
+				if (rbtree.findValue(value)->isNotNull())
+					cout << "podana wartosc jest w kopcu";
+				else
+					cout << "podanej wartosci NIE ma w kopcu";
+				break;
+
+			case '5':  //tutaj generowanie  tablicy
+				cout << "Podaj ilosc elementow kopca:";
+				cin >> value;
+				rbtree.generateRandom(value);
+				rbtree.display(cout);
+				break;
+
+			case '6':  //tutaj wyswietlanie tablicy
+				rbtree.display(cout);
 				break;
 
 			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
