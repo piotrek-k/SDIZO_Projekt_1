@@ -18,6 +18,9 @@ bool RBMember::isNull()
 	return state != Initialized;
 }
 
+/// <summary>
+/// Inicjalizuje obiekt RBMember. Od tej chwili state == Initalized i isNull() == false
+/// </summary>
 void RBMember::build()
 {
 	state = Initialized;

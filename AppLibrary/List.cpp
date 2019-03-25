@@ -68,7 +68,7 @@ void List::addElementAtIndex(int index, int value)
 		}
 
 		if (indexCounter == index) {
-			ListMember* newElem = (ListMember*)malloc(sizeof(struct ListMember));
+			ListMember* newElem = new ListMember();
 			newElem->value = value;
 			newElem->nextValue = nextElem;
 			newElem->prevValue = nextElem->prevValue;
@@ -88,7 +88,7 @@ void List::removeElementByValue(int value)
 {
 	ListMember* elem = this->firstValue;
 	for (int a = 0; a < getDeclaredSize(); a++) {
-		if (elem == NULL || elem == nullptr) {
+		if (elem == NULL) {
 			break;
 		}
 
@@ -111,7 +111,7 @@ void List::removeElementByValue(int value)
 
 void List::addElement(int value)
 {
-	ListMember* newElem = (ListMember*)malloc(sizeof(struct ListMember));
+	ListMember* newElem = new ListMember();
 	newElem->value = value;
 	if (firstValue != NULL) {
 		firstValue->nextValue = newElem;
@@ -136,13 +136,13 @@ void List::generateRandom(int size)
 {
 	srand(time(NULL));
 
-	ListMember* newFirstValue = (ListMember*)malloc(sizeof(struct ListMember));
+	ListMember* newFirstValue = new ListMember();
 	newFirstValue->value = rand() % 150 - 50;
 	firstValue = newFirstValue;
 
 	ListMember* lastValue = firstValue;
 	for (int a = 0; a < size-1; a++) {
-		ListMember* newValue = (ListMember*)malloc(sizeof(struct ListMember));
+		ListMember* newValue = new ListMember();
 		newValue->value = rand() % 150 - 50;
 
 		lastValue->prevValue = newValue;

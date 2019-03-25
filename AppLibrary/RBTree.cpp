@@ -3,7 +3,11 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-
+/// <summary>
+/// Dodawanie elementu jak do drzewa BST. Nie porz¹dkuje drzewa wg. kolorów po dodaniu elementu.
+/// </summary>
+/// <param name="value">wartoœæ elementu</param>
+/// <returns></returns>
 RBMember* RBTree::treeInsert(int value)
 {
 	RBMember* newElem = new RBMember();
@@ -37,6 +41,10 @@ RBMember* RBTree::treeInsert(int value)
 	return newElem;
 }
 
+/// <summary>
+/// "Obrót" drzewa w lewo
+/// </summary>
+/// <param name="node"></param>
 void RBTree::leftRotate(RBMember * node)
 {
 	RBMember* y = node->rightNode;
@@ -60,6 +68,10 @@ void RBTree::leftRotate(RBMember * node)
 	node->parentNode = y;
 }
 
+/// <summary>
+/// "Obrót" drzewa w prawo
+/// </summary>
+/// <param name="y"></param>
 void RBTree::rightRotate(RBMember * y)
 {
 	//zgodnie z rysunkiem, Cormen strona 306
@@ -94,6 +106,11 @@ void RBTree::rightRotate(RBMember * y)
 
 }
 
+/// <summary>
+/// Minimalna wartoœæ drzewa RB
+/// </summary>
+/// <param name="node"></param>
+/// <returns></returns>
 RBMember* RBTree::treeMinimum(RBMember * node)
 {
 	while (node->leftNode->isNotNull()) {
@@ -102,6 +119,11 @@ RBMember* RBTree::treeMinimum(RBMember * node)
 	return node;
 }
 
+/// <summary>
+/// Zwraca nastêpn¹ wzglêdem wielkoœci wartoœæ w drzewie
+/// </summary>
+/// <param name="node"></param>
+/// <returns></returns>
 RBMember * RBTree::treeSuccessor(RBMember * node)
 {
 	// jeœli wêze³ ma prawego potomka, znajdŸ najmniejsz¹ wartoœæ zaczynaj¹c od niego
@@ -118,6 +140,10 @@ RBMember * RBTree::treeSuccessor(RBMember * node)
 	return y;
 }
 
+/// <summary>
+/// Generuje drzewo bazuj¹c na danych z pliku o podanej nazwie
+/// </summary>
+/// <param name="FileName"></param>
 void RBTree::loadFromFile(std::string FileName)
 {
 }
@@ -131,6 +157,10 @@ RBTree::~RBTree()
 {
 }
 
+/// <summary>
+/// Generuje nowe drzewo o losowych wartoœciach
+/// </summary>
+/// <param name="size">Wielkoœæ drzewa</param>
 void RBTree::generateRandom(int size)
 {
 	srand(time(NULL));
@@ -140,6 +170,11 @@ void RBTree::generateRandom(int size)
 	}
 }
 
+/// <summary>
+/// Zwraca wskaŸnik do wêz³a o szukanej wartoœci
+/// </summary>
+/// <param name="value"></param>
+/// <returns></returns>
 RBMember* RBTree::findValue(int value)
 {
 	RBMember* x = root;
@@ -157,6 +192,10 @@ RBMember* RBTree::findValue(int value)
 	return NULL;
 }
 
+/// <summary>
+/// Wstawianie wartoœci do drzewa czerwono-czarnego
+/// </summary>
+/// <param name="value"></param>
 void RBTree::rbInsert(int value)
 {
 	RBMember* x = treeInsert(value);
@@ -239,12 +278,21 @@ void RBTree::rbInsert(int value)
 	root->color = Black;
 }
 
+/// <summary>
+/// Usuwanie elementu wg. wartoœci. Jeœli wartoœci powtarzaj¹ siê - usuwa element znaleziony jako pierwszy
+/// </summary>
+/// <param name="value"></param>
 void RBTree::removeElement(int value)
 {
 	RBMember* elem = this->findValue(value);
 	removeElement(elem);
 }
 
+/// <summary>
+/// Usuwa element o podanym wskaŸniku
+/// </summary>
+/// <param name="z"></param>
+/// <returns></returns>
 RBMember* RBTree::removeElement(RBMember* z)
 {
 	// algorytm zamiast fizycznie usuwaæ wêze³
@@ -289,7 +337,10 @@ RBMember* RBTree::removeElement(RBMember* z)
 	return y;
 }
 
-
+/// <summary>
+/// Porz¹dkuje drzewo RB po usuniêciu elementu
+/// </summary>
+/// <param name="x"></param>
 void RBTree::RBDeleteFixup(RBMember * x)
 {
 	// przywrócenie w³asnoœci drzewa po usuniêciu elementu
@@ -355,6 +406,10 @@ void RBTree::RBDeleteFixup(RBMember * x)
 	}
 }
 
+/// <summary>
+/// Wyœwietla drzewo
+/// </summary>
+/// <param name="stream"></param>
 void RBTree::display(std::ostream & stream)
 {
 }
