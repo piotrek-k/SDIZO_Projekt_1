@@ -50,11 +50,11 @@ void RBTree::leftRotate(RBMember * node)
 	RBMember* y = node->rightNode;
 	node->rightNode = y->leftNode;
 
-	if (y->leftNode != NULL) {
+	if (y->leftNode->isNotNull()) {
 		y->leftNode->parentNode = node;
 	}
 	y->parentNode = node->parentNode;
-	if (node->parentNode == NULL) {
+	if (node->parentNode->isNull()) {
 		root = y;
 	}
 	else if (node == node->parentNode->leftNode) {
@@ -212,7 +212,7 @@ void RBTree::rbInsert(int value)
 				// rodzic nowego wêz³a jest lewym wêz³em
 
 				y = x->parentNode->parentNode->rightNode; //pobierz prawy odpowiednik rodzica
-				if (y->color == Red) {
+				if (y->color == Red && y->isNotNull()) {
 					//prawy odpowiednik rodzica te¿ jest czerwony
 
 					x->parentNode->color = Black; // zmieñ rodzica na czarnego
@@ -247,7 +247,7 @@ void RBTree::rbInsert(int value)
 				// rodzic nowego wêz³a jest prawym wêz³em
 
 				y = x->parentNode->parentNode->leftNode; //pobierz lewy odpowiednik rodzica
-				if (y->color == Red) {
+				if (y->color == Red && y->isNotNull()) {
 					//lewy odpowiednik rodzica te¿ jest czerwony
 
 					x->parentNode->color = Black; // zmieñ rodzica na czarnego
@@ -290,7 +290,12 @@ void RBTree::rbInsert(int value)
 void RBTree::removeElement(int value)
 {
 	RBMember* elem = this->findValue(value);
-	removeElement(elem);
+	if (elem != NULL) {
+		removeElement(elem);
+	}
+	else {
+		throw std::exception("Proba usuniecia niestniejacego elementu");
+	}
 }
 
 /// <summary>
@@ -366,6 +371,7 @@ void RBTree::RBDeleteFixup(RBMember * x)
 			if (w->leftNode->color == Black && w->rightNode->color == Black) {
 				w->color = Red;
 				x = x->parentNode;
+				continue;
 			}
 			else if (w->rightNode->color == Black) {
 				w->leftNode->color = Black;
@@ -393,6 +399,7 @@ void RBTree::RBDeleteFixup(RBMember * x)
 			if (w->rightNode->color == Black && w->leftNode->color == Black) {
 				w->color = Red;
 				x = x->parentNode;
+				continue;
 			}
 			else if (w->leftNode->color == Black) {
 				w->rightNode->color = Black;
