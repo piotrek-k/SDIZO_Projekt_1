@@ -161,12 +161,15 @@ RBTree::~RBTree()
 /// Generuje nowe drzewo o losowych wartoœciach
 /// </summary>
 /// <param name="size">Wielkoœæ drzewa</param>
-void RBTree::generateRandom(int size)
+void RBTree::generateRandom(int size, int range)
 {
 	srand(time(NULL));
 	root = new RBMember();
+	int lastValue = 0;
 	for (int a = 0; a < size; a++) {
-		this->rbInsert(rand() % 150 - 50);
+		int newValue = lastValue + rand() % range;
+		this->rbInsert(newValue);
+		lastValue = newValue;
 	}
 }
 
@@ -271,7 +274,7 @@ void RBTree::rbInsert(int value)
 						leftRotate(x->parentNode->parentNode);
 					}
 				}
-				
+
 			}
 		}
 	}

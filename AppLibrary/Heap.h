@@ -21,7 +21,7 @@ public:
 	void populateFromArray(int * arr, int size);
 	void addElement(int key);
 	void removeElementAtIndex(int index);
-	void generateRandom(int size);
+	void generateRandom(int size, int range);
 
 	bool findValue(int val);
 	

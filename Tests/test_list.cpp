@@ -99,7 +99,7 @@ TEST(ListTest_Standalone, RemoveValueAndConsistencyCheck) {
 
 TEST(ListTest_Standalone, RandomListConsistencyCheck) {
 	List list = List();
-	list.generateRandom(6);
+	list.generateRandom(6, 10);
 	int* generatedArr = list.toArray();
 
 	EXPECT_EQ(list.getDeclaredSize(), 6);

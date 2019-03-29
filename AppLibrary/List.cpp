@@ -132,18 +132,18 @@ void List::display(ostream& stream)
 	}
 }
 
-void List::generateRandom(int size)
+void List::generateRandom(int size, int range)
 {
 	srand(time(NULL));
 
 	ListMember* newFirstValue = new ListMember();
-	newFirstValue->value = rand() % 150 - 50;
+	newFirstValue->value = rand() % range;
 	firstValue = newFirstValue;
 
 	ListMember* lastValue = firstValue;
 	for (int a = 0; a < size-1; a++) {
 		ListMember* newValue = new ListMember();
-		newValue->value = rand() % 150 - 50;
+		newValue->value = rand() % range;
 
 		lastValue->prevValue = newValue;
 		newValue->nextValue = lastValue;

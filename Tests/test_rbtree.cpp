@@ -193,3 +193,8 @@ TEST(RBTreeTest, findValue) {
 
 	EXPECT_TRUE(rb->findValue(9) == NULL);
 }
+
+TEST(RBTreeTest, generatingRandomWorksWell) {
+	RBTree* rb = new RBTree();
+	EXPECT_NO_THROW(rb->generateRandom(10, 10));
+}

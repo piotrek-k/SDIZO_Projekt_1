@@ -14,7 +14,7 @@ public:
 	RBMember* treeMinimum(RBMember* node);
 	RBMember* treeSuccessor(RBMember* node);
 	void loadFromFile(std::string FileName);
-	void generateRandom(int size);
+	void generateRandom(int size, int range);
 	RBMember* findValue(int value);
 	void rbInsert(int value);
 	void removeElement(int value);

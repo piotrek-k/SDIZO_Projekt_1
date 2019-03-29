@@ -58,13 +58,13 @@ double timeCounter::Summarize()
 void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps, ostream & stream)
 {
 	srand(time(NULL));
-	List myList = List();
-	Heap myHeap = Heap();
-	RBTree myTree = RBTree();
+	List* myList = new List();
+	Heap* myHeap = new Heap();
+	RBTree* myTree = new RBTree();
 	Table* myTab = new Table();
 	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
 		//---------TABELA
-		stream << "Tab " << numOfElements << "\t";
+		stream << "Tab \t " << numOfElements << " \t ";
 		// dodawanie
 		InitCounter();
 		for (int b = 0; b < numOfReps; b++) {
@@ -85,7 +85,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 			}
 			EndSingleMeasurement();
 		}
-		stream << Summarize() << "\t";
+		stream << Summarize() << " \t ";
 
 		//usuwanie z konca
 		InitCounter();
@@ -97,7 +97,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 			}
 			EndSingleMeasurement();
 		}
-		stream << Summarize() << "\t";
+		stream << Summarize() << " \t ";
 
 		//wyszukiwanie losowych
 		myTab->generateRandom(numOfElements, 10);
@@ -109,7 +109,133 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 			}
 			EndSingleMeasurement();
 		}
-		stream << Summarize() << "\t";
+		stream << Summarize() << " \t ";
+		stream << endl;
+	}
+
+	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
+		//---------LISTA
+		stream << "List \t " << numOfElements << " \t ";
+		// dodawanie
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			StartNextMeasurement();
+			for (int a = 0; a < numOfElements; a++) {
+				myList->addElement(1);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+
+		//wyszukiwanie losowych
+		myList->generateRandom(numOfElements, 10);
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			StartNextMeasurement();
+			for (int a = 0; a < numOfSearches; a++) {
+				myList->findValue(rand() % 10);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+		stream << endl;
+	}
+
+	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
+		//---------KOPIEC
+		stream << "Heap \t " << numOfElements << " \t ";
+		// dodawanie
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			StartNextMeasurement();
+			myHeap->generateRandom(numOfElements, 10);
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+		//usuwanie z poczatku
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			myHeap->generateRandom(numOfElements, 10);
+			StartNextMeasurement();
+			for (int a = 0; a < numOfElements; a++) {
+				myHeap->removeElementAtIndex(myHeap->getDeclaredSize() - 1);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+
+		//usuwanie z konca
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			myHeap->generateRandom(numOfElements, 10);
+			StartNextMeasurement();
+			for (int a = 0; a < numOfElements; a++) {
+				myHeap->removeElementAtIndex(0);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+
+		//wyszukiwanie losowych
+		myHeap->generateRandom(numOfElements, 10);
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			StartNextMeasurement();
+			for (int a = 0; a < numOfSearches; a++) {
+				myHeap->findValue(rand() % 10);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+		stream << endl;
+	}
+
+	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
+		//---------Drzewo CC
+		stream << "RBTree \t " << numOfElements << " \t ";
+		// dodawanie
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			StartNextMeasurement();
+			myTree->generateRandom(numOfElements, 10);
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+		//usuwanie liczby 5
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			myTree->generateRandom(numOfElements, 10);
+			StartNextMeasurement();
+			for (int a = 0; a < numOfElements; a++) {
+				myTree->removeElement(5);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+
+		//usuwanie liczby 9
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			myTree->generateRandom(numOfElements, 10);
+			StartNextMeasurement();
+			for (int a = 0; a < numOfElements; a++) {
+				myTree->removeElement(9);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
+
+		//wyszukiwanie losowych
+		myTree->generateRandom(numOfElements, 10);
+		InitCounter();
+		for (int b = 0; b < numOfReps; b++) {
+			StartNextMeasurement();
+			for (int a = 0; a < numOfSearches; a++) {
+				myTree->findValue(rand() % 10);
+			}
+			EndSingleMeasurement();
+		}
+		stream << Summarize() << " \t ";
 		stream << endl;
 	}
 }

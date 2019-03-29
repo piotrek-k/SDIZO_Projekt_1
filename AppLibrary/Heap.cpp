@@ -138,6 +138,10 @@ bool Heap::findValue(int val)
 /// <returns></returns>
 bool Heap::searchFromIndex(int val, int index)
 {
+	if (index > this->count) {
+		return false;
+	}
+
 	if (this->tab[index] == val) {
 		return true;
 	}
@@ -194,12 +198,12 @@ string Heap::convertToString()
 /// Generuje losowe wartoœci do kopca
 /// </summary>
 /// <param name="size"></param>
-void Heap::generateRandom(int size)
+void Heap::generateRandom(int size, int range)
 {
 	srand(time(NULL));
 	int* newArray = new int[size];
 	for (int a = 0; a < size; a++) {
-		newArray[a] = rand() % 150 - 50;
+		newArray[a] = rand() % range;
 	}
 	this->populateFromArray(newArray, size);
 }

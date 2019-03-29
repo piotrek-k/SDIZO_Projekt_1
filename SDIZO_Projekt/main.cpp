@@ -168,7 +168,7 @@ void menu_list()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow tablicy:";
 				cin >> value;
-				myTab.generateRandom(value);
+				myTab.generateRandom(value, 10);
 				myTab.display(cout);
 				break;
 
@@ -238,7 +238,7 @@ void menu_heap()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow kopca:";
 				cin >> value;
-				myTab.generateRandom(value);
+				myTab.generateRandom(value, 10);
 				myTab.display(cout);
 				break;
 
@@ -307,7 +307,7 @@ void menu_rbtree()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow kopca:";
 				cin >> value;
-				rbtree.generateRandom(value);
+				rbtree.generateRandom(value, 10);
 				rbtree.display(cout);
 				break;
 

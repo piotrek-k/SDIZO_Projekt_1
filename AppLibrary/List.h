@@ -15,7 +15,7 @@ public:
 	virtual void removeElementByValue(int value);
 	void addElement(int value);
 	void display(std::ostream & stream);
-	virtual void generateRandom(int size);
+	virtual void generateRandom(int size, int range);
 	int* toArray();
 	int getDeclaredSize();
 	ListMember* getFirstValue();
