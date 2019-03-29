@@ -154,11 +154,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryTreeDisplay.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="timeCounter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryTreeDisplay.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

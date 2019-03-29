@@ -13,35 +13,27 @@
 #include "../AppLibrary/List.h"
 #include "../AppLibrary/Heap.h"
 #include "../AppLibrary/RBTree.h"
+#include "BinaryTreeDisplay.h"
 using namespace std;
 
 timeCounter tC = timeCounter();
+BinaryTreeDisplay btd = BinaryTreeDisplay();
 
 void displayMenu(string info, bool isLoaded)
 {
 	cout << endl;
 	cout << info << endl;
 	cout << "1.Wczytaj z pliku" << endl;
-	if (isLoaded) {
-		cout << "2.Usun" << endl;
-		cout << "3.Dodaj" << endl;
-		cout << "4.Znajdz" << endl;
-		cout << "5.Utworz losowo" << endl;
-		cout << "6.Wyswietl" << endl;
-		cout << "7.Test (pomiary)" << endl;
-	}
+	//if (isLoaded) {
+	cout << "2.Usun" << endl;
+	cout << "3.Dodaj" << endl;
+	cout << "4.Znajdz" << endl;
+	cout << "5.Utworz losowo" << endl;
+	cout << "6.Wyswietl" << endl;
+	//}
 	cout << "0.Powrot do menu" << endl;
 	cout << "Podaj opcje:";
 }
-
-/// <summary>
-/// Funkcja mierząca czas wykonania wszystkich operacji
-/// każdej struktury na num elementach
-/// </summary>
-/// <param name="num"></param>
-//void measure_time(int num) {
-//	
-//}
 
 void menu_table()
 {
@@ -105,7 +97,7 @@ void menu_table()
 
 			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
 					  // mo�na sobie tu doda� w�asne case'y
-				tC.Start(200, 10, 50, 100, cout);
+				//tC.Start(200, 10, 50, 100, cout);
 				break;
 			}
 		}
@@ -312,7 +304,8 @@ void menu_rbtree()
 				break;
 
 			case '6':  //tutaj wyswietlanie tablicy
-				rbtree.display(cout);
+				//rbtree.display(cout);
+				btd.print_t(rbtree.root);
 				break;
 
 			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
@@ -337,6 +330,8 @@ int main(int argc, char* argv[])
 		cout << "1.Tablica" << endl;
 		cout << "2.Lista" << endl;
 		cout << "3.Kopiec" << endl;
+		cout << "4.Drzewo czerwono-czarne" << endl;
+		cout << "5.Wykonaj pomiary" << endl;
 		cout << "0.Wyjscie" << endl;
 		cout << "Podaj opcje:";
 		//option = _getche();
@@ -354,6 +349,14 @@ int main(int argc, char* argv[])
 
 		case '3':
 			menu_heap();
+			break;
+
+		case '4':
+			menu_rbtree();
+			break;
+
+		case '5':
+			tC.Start(200, 10, 50, 100, cout);
 			break;
 		}
 

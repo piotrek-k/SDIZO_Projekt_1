@@ -2,6 +2,10 @@
 #include "RBTree.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <string>
+#include <fstream>
+
+using namespace std;
 
 /// <summary>
 /// Dodawanie elementu jak do drzewa BST. Nie porz¹dkuje drzewa wg. kolorów po dodaniu elementu.
@@ -146,6 +150,27 @@ RBMember * RBTree::treeSuccessor(RBMember * node)
 /// <param name="FileName"></param>
 void RBTree::loadFromFile(std::string FileName)
 {
+	string line;
+	ifstream myfile(FileName);
+	bool firstLine = true;
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			int number = stoi(line);
+			if (firstLine) {
+				firstLine = false;
+				//count = number;
+			}
+			else {
+				this->rbInsert(number);
+			}
+		}
+		myfile.close();
+	}
+	else {
+		throw "Wyst¹pi³ problem z wczytaniem danych z pliku";
+	}
 }
 
 RBTree::RBTree()
