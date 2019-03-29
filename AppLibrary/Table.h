@@ -19,11 +19,18 @@ public:
 
 	void addElement(int index, int value);
 
+	void addElementAtBeginning(int value);
+
+	void addElementAtTheEnd(int value);
+
 	void removeElement(int index);
+
+	void removeElementAtTheEnd();
+	void removeElementAtTheBeginning();
 
 	void display(ostream & stream);
 
-	void generateRandom(int size);
+	void generateRandom(int size, int range);
 
 	int getDeclaredSize();
 

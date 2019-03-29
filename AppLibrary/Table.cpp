@@ -101,8 +101,18 @@ void Table::addElement(int index, int value)
 		}
 	}
 	this->count = newSize;
-
+	delete tab;
 	tab = newtab;
+}
+
+void Table::addElementAtBeginning(int value)
+{
+	addElement(0, value);
+}
+
+void Table::addElementAtTheEnd(int value)
+{
+	addElement(count, value);
 }
 
 /// <summary>
@@ -126,6 +136,16 @@ void Table::removeElement(int index)
 	tab = newtab;
 }
 
+void Table::removeElementAtTheEnd()
+{
+	removeElement(count - 1);
+}
+
+void Table::removeElementAtTheBeginning()
+{
+	removeElement(0);
+}
+
 /// <summary>
 /// Przekazuje dane o tablicy na podany strumieñ
 /// </summary>
@@ -142,15 +162,17 @@ void Table::display(ostream& stream)
 /// Generuje losowe wartoœci do tablicy
 /// </summary>
 /// <param name="size"></param>
-void Table::generateRandom(int numberOfElements)
+void Table::generateRandom(int numberOfElements, int range)
 {
 	srand(time(NULL));
+
+	delete tab;
 
 	tab = new int[numberOfElements];
 	count = numberOfElements;
 
 	for (int a = 0; a < numberOfElements; a++) {
-		tab[a] = rand() % 150 - 50;
+		tab[a] = rand() % range;
 	}
 }
 

@@ -8,12 +8,14 @@
 #include<string>
 #include <iostream>
 #include <filesystem>
+#include "timeCounter.h"
 #include "../AppLibrary/Table.h"
 #include "../AppLibrary/List.h"
 #include "../AppLibrary/Heap.h"
 #include "../AppLibrary/RBTree.h"
 using namespace std;
 
+timeCounter tC = timeCounter();
 
 void displayMenu(string info, bool isLoaded)
 {
@@ -31,6 +33,15 @@ void displayMenu(string info, bool isLoaded)
 	cout << "0.Powrot do menu" << endl;
 	cout << "Podaj opcje:";
 }
+
+/// <summary>
+/// Funkcja mierząca czas wykonania wszystkich operacji
+/// każdej struktury na num elementach
+/// </summary>
+/// <param name="num"></param>
+//void measure_time(int num) {
+//	
+//}
 
 void menu_table()
 {
@@ -84,7 +95,7 @@ void menu_table()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow tablicy:";
 				cin >> value;
-				myTab.generateRandom(value);
+				myTab.generateRandom(value, 10);
 				myTab.display(cout);
 				break;
 
@@ -94,11 +105,12 @@ void menu_table()
 
 			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
 					  // mo�na sobie tu doda� w�asne case'y
+				tC.Start(200, 10, 50, 100, cout);
 				break;
 			}
 		}
 		catch (const std::exception& e) {
-			cout << "Program zwrocil blad: " << e.what() << endl;
+			cout << "program zwrocil blad: " << e.what() << endl;
 		}
 
 	} while (opt != '0');
