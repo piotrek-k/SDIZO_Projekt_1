@@ -219,8 +219,9 @@ void RBTree::rbInsert(int value)
 					y->color = Black; // zmieñ prawy odpowiednik rodzica na czarny
 					x->parentNode->parentNode->color = Red;
 					x = x->parentNode->parentNode;
+					continue;
 				}
-				else if (x == x->parentNode->rightNode) {
+				if (x == x->parentNode->rightNode) {
 					//rodzic i jego odpow. maj¹ inne kolory
 					//x jest prawym wêz³em
 
@@ -230,16 +231,16 @@ void RBTree::rbInsert(int value)
 
 					//rodzic i jego odpow. maj¹ inne kolory
 					//x jest lewym wêz³em
-
-					//przyp 3
-					if (x != root) {
-						x->parentNode->color = Black;
-					}
-					if (x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
-						x->parentNode->parentNode->color = Red;
-						rightRotate(x->parentNode->parentNode);
-					}
 				}
+				//przyp 3
+				if (x != root) {
+					x->parentNode->color = Black;
+				}
+				if (x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
+					x->parentNode->parentNode->color = Red;
+					rightRotate(x->parentNode->parentNode);
+				}
+				break;
 
 			}
 			else {
@@ -253,8 +254,9 @@ void RBTree::rbInsert(int value)
 					y->color = Black; // zmieñ lewy odpowiednik rodzica na czarny
 					x->parentNode->parentNode->color = Red;
 					x = x->parentNode->parentNode;
+					continue;
 				}
-				else if (x == x->parentNode->leftNode) {
+				if (x == x->parentNode->leftNode) {
 					//rodzic i jego odpow. maj¹ inne kolory
 					//x jest lewym wêz³em
 
@@ -264,17 +266,17 @@ void RBTree::rbInsert(int value)
 
 					//rodzic i jego odpow. maj¹ inne kolory
 					//x jest prawym wêz³em
-
-					//przyp 3
-					if (x != root) {
-						x->parentNode->color = Black;
-					}
-					if (x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
-						x->parentNode->parentNode->color = Red;
-						leftRotate(x->parentNode->parentNode);
-					}
 				}
 
+				//przyp 3
+				if (x != root) {
+					x->parentNode->color = Black;
+				}
+				if (x->parentNode->parentNode != nullptr && x->parentNode->parentNode->isNotNull()) {
+					x->parentNode->parentNode->color = Red;
+					leftRotate(x->parentNode->parentNode);
+				}
+				break;
 			}
 		}
 	}
