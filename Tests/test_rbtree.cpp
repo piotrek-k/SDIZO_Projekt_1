@@ -198,3 +198,32 @@ TEST(RBTreeTest, generatingRandomWorksWell) {
 	RBTree* rb = new RBTree();
 	EXPECT_NO_THROW(rb->generateRandom(10, 10));
 }
+
+int counter(RBMember* mem) {
+	if (mem->isNull()) {
+		return 0;
+	}
+	if (mem->leftNode->isNull() && mem->rightNode->isNull()) {
+		return 1;
+	}
+	return counter(mem->leftNode) + counter(mem->rightNode) + 1;
+}
+
+TEST(RBTreeTest, treesHaveProperSize) {
+	RBTree* rb = buildRBTreeFromBook();
+
+	EXPECT_EQ(counter(rb->root), 8);
+
+	rb = new RBTree();
+	rb->rbInsert(0);
+	rb->rbInsert(1);
+	rb->rbInsert(2);
+	rb->rbInsert(3);
+	rb->rbInsert(4);
+	rb->rbInsert(5);
+	rb->rbInsert(6);
+	rb->rbInsert(7);
+	rb->rbInsert(8);
+	rb->rbInsert(9);
+	EXPECT_EQ(counter(rb->root), 10);
+}

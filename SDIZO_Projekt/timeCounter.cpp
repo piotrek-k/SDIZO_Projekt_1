@@ -201,25 +201,16 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 			EndSingleMeasurement();
 		}
 		stream << Summarize() << " \t ";
-		//usuwanie liczby 5
+		//usuwanie wartoœci rosn¹co
 		InitCounter();
 		for (int b = 0; b < numOfReps; b++) {
-			myTree->generateRandom(numOfElements, 10);
-			StartNextMeasurement();
+			myTree = new RBTree();
 			for (int a = 0; a < numOfElements; a++) {
-				myTree->removeElement(5);
+				myTree->rbInsert(a);
 			}
-			EndSingleMeasurement();
-		}
-		stream << Summarize() << " \t ";
-
-		//usuwanie liczby 9
-		InitCounter();
-		for (int b = 0; b < numOfReps; b++) {
-			myTree->generateRandom(numOfElements, 10);
 			StartNextMeasurement();
 			for (int a = 0; a < numOfElements; a++) {
-				myTree->removeElement(9);
+				myTree->removeElement(a);
 			}
 			EndSingleMeasurement();
 		}
