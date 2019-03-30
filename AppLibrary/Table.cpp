@@ -132,6 +132,7 @@ void Table::removeElement(int index)
 		oldIndex++;
 	}
 	this->count = newSize;
+	delete tab;
 
 	tab = newtab;
 }

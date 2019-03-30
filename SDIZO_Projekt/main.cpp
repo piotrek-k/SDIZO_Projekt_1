@@ -356,7 +356,7 @@ int main(int argc, char* argv[])
 			break;
 
 		case '5':
-			tC.Start(200, 10, 50, 100, cout);
+			tC.Start(410, 10, 50, 100, cout);
 			break;
 		}
 

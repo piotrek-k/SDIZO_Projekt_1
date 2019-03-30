@@ -115,6 +115,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 
 	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
 		//---------LISTA
+		myList = new List();
 		stream << "List \t " << numOfElements << " \t ";
 		// dodawanie
 		InitCounter();
@@ -139,10 +140,14 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 		}
 		stream << Summarize() << " \t ";
 		stream << endl;
+		
+		delete myList;
 	}
+
 
 	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
 		//---------KOPIEC
+		//myHeap = new Heap();
 		stream << "Heap \t " << numOfElements << " \t ";
 		// dodawanie
 		InitCounter();
@@ -188,6 +193,8 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 		}
 		stream << Summarize() << " \t ";
 		stream << endl;
+
+		//delete myHeap;
 	}
 
 	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {

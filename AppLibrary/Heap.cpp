@@ -251,5 +251,6 @@ void Heap::changeDeclaredSize(int newCount)
 	}
 
 	this->count = newCount;
+	delete tab;
 	this->tab = newTab;
 }

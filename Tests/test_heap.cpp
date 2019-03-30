@@ -72,3 +72,11 @@ TEST(HeapTest_Standalone, BuildHeapShouldCreateCorrectOrder) {
 		EXPECT_EQ(heapAsArray[i], expectedResult[i]);
 	}
 }
+
+TEST(HeapTest_Standalone, TestRandomGeneration) {
+	// data ordered by buildHeap
+
+	Heap heap = Heap();
+	heap.generateRandom(10, 10);
+	EXPECT_EQ(heap.getDeclaredSize(), 10);
+}
