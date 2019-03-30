@@ -36,4 +36,6 @@ public:
 
 	int getValueAtIndex(int index);
 
+	void clearTable();
+
 };

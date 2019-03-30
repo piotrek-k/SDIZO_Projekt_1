@@ -64,6 +64,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 	Table* myTab = new Table();
 	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
 		//---------TABELA
+		myTab->clearTable();
 		stream << "Tab \t " << numOfElements << " \t ";
 		// dodawanie
 		InitCounter();
@@ -73,7 +74,9 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 				myTab->addElementAtTheEnd(1);
 			}
 			EndSingleMeasurement();
+			myTab->clearTable();
 		}
+		
 		stream << Summarize() << " \t ";
 		//usuwanie z poczatku
 		InitCounter();
@@ -84,6 +87,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 				myTab->removeElementAtTheEnd();
 			}
 			EndSingleMeasurement();
+			myTab->clearTable();
 		}
 		stream << Summarize() << " \t ";
 
@@ -96,6 +100,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 				myTab->removeElementAtTheBeginning();
 			}
 			EndSingleMeasurement();
+			myTab->clearTable();
 		}
 		stream << Summarize() << " \t ";
 
@@ -109,6 +114,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 			}
 			EndSingleMeasurement();
 		}
+		myTab->clearTable();
 		stream << Summarize() << " \t ";
 		stream << endl;
 	}
@@ -148,6 +154,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 	for (int numOfElements = stepSize; numOfElements < num; numOfElements += stepSize) {
 		//---------KOPIEC
 		//myHeap = new Heap();
+		myHeap->clearHeap();
 		stream << "Heap \t " << numOfElements << " \t ";
 		// dodawanie
 		InitCounter();

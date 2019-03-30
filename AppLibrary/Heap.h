@@ -31,5 +31,7 @@ public:
 
 	int getDeclaredSize();
 	void changeDeclaredSize(int newCount);
+
+	void clearHeap();
 };
 

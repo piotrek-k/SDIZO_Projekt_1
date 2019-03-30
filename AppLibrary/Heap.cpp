@@ -200,12 +200,15 @@ string Heap::convertToString()
 /// <param name="size"></param>
 void Heap::generateRandom(int size, int range)
 {
+	clearHeap();
 	srand(time(NULL));
-	int* newArray = new int[size];
+	//int* newArray = new int[size];
 	for (int a = 0; a < size; a++) {
-		newArray[a] = rand() % range;
+		//newArray[a] = rand() % range;
+		int newV = rand() % range;
+		this->addElement(newV);
 	}
-	this->populateFromArray(newArray, size);
+	//this->populateFromArray(newArray, size);
 }
 
 /// <summary>
@@ -250,7 +253,13 @@ void Heap::changeDeclaredSize(int newCount)
 		newTab[a] = this->tab[a];
 	}
 
+	clearHeap();
 	this->count = newCount;
-	delete tab;
 	this->tab = newTab;
+}
+
+void Heap::clearHeap() {
+	delete tab;
+	tab = new int[1];
+	count = 0;
 }

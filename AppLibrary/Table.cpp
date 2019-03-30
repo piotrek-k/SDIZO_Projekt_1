@@ -100,9 +100,15 @@ void Table::addElement(int index, int value)
 			oldIndex++;
 		}
 	}
+	clearTable();
 	this->count = newSize;
-	delete tab;
 	tab = newtab;
+}
+
+void Table::clearTable() {
+	delete tab;
+	tab = new int[1];
+	count = 0;
 }
 
 void Table::addElementAtBeginning(int value)
