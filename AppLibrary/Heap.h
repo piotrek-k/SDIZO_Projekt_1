@@ -24,6 +24,8 @@ public:
 	void generateRandom(int size, int range);
 
 	bool findValue(int val);
+	int getValueAtIndex(int index);
+	bool indexIsValid(int index);
 	
 	std::string convertToString();
 	int* toArray();

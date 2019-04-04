@@ -130,6 +130,22 @@ bool Heap::findValue(int val)
 	return this->searchFromIndex(val, 0);
 }
 
+int Heap::getValueAtIndex(int index)
+{
+	if (!indexIsValid(index)) {
+		return 0;
+	}
+	return tab[index];
+}
+
+bool Heap::indexIsValid(int index)
+{
+	if (index < 0 || index >= getDeclaredSize()) {
+		return false;
+	}
+	return true;
+}
+
 /// <summary>
 /// Funkcja pomocnicza do findValue
 /// </summary>

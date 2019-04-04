@@ -132,7 +132,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 			}
 			EndSingleMeasurement();
 		}
-		stream << Summarize() << " \t ";
+		stream << Summarize() << " \t \t \t \t \t ";
 
 		//wyszukiwanie losowych
 		myList->generateRandom(numOfElements, 10);
@@ -228,7 +228,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 			}
 			EndSingleMeasurement();
 		}
-		stream << Summarize() << " \t ";
+		stream << Summarize() << " \t \t \t ";
 
 		//wyszukiwanie losowych
 		myTree->generateRandom(numOfElements, 10);

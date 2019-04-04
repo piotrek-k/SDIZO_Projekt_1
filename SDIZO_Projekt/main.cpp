@@ -236,6 +236,8 @@ void menu_heap()
 
 			case '6':  //tutaj wyswietlanie tablicy
 				myTab.display(cout);
+				cout << endl;
+				btd.print_t(&myTab);
 				break;
 
 			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
