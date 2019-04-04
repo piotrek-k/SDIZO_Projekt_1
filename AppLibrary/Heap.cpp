@@ -15,26 +15,33 @@ using namespace std;
 /// <param name="FileName">œcie¿ka do pliku</param>
 void Heap::loadFromFile(std::string FileName)
 {
+	clearHeap();
+
 	string line;
 	ifstream myfile(FileName);
 	bool firstLine = true;
-	if (myfile.is_open())
-	{
-		while (getline(myfile, line))
+	try {
+		if (myfile.is_open())
 		{
-			int number = stoi(line);
-			if (firstLine) {
-				firstLine = false;
-				//count = number;
+			while (getline(myfile, line))
+			{
+				int number = stoi(line);
+				if (firstLine) {
+					firstLine = false;
+					//count = number;
+				}
+				else {
+					this->addElement(number);
+				}
 			}
-			else {
-				this->addElement(number);
-			}
+			myfile.close();
 		}
-		myfile.close();
+		else {
+			throw exception("Wystapil problem z otworzeniem pliku o podanej nazwie");
+		}
 	}
-	else {
-		throw "Wyst¹pi³ problem z wczytaniem danych z pliku";
+	catch (const exception& e) {
+		throw exception("Wystapil problem z wczytaniem danych z pliku");
 	}
 }
 
@@ -56,7 +63,7 @@ int Heap::getIndexOfParent(int index)
 /// <returns></returns>
 int Heap::getLeftChildIndex(int index)
 {
-	return 2*index+1;
+	return 2 * index + 1;
 }
 
 /// <summary>
@@ -66,7 +73,7 @@ int Heap::getLeftChildIndex(int index)
 /// <returns></returns>
 int Heap::getRightChildIndex(int index)
 {
-	return 2*index+2;
+	return 2 * index + 2;
 }
 
 /// <summary>
@@ -86,7 +93,7 @@ void Heap::populateFromArray(int * arr, int size)
 /// </summary>
 void Heap::buildHeap()
 {
-	for (int x = floor(this->getDeclaredSize() / 2)-1; x >= 0; x--) {
+	for (int x = floor(this->getDeclaredSize() / 2) - 1; x >= 0; x--) {
 		this->heapify(x);
 	}
 }

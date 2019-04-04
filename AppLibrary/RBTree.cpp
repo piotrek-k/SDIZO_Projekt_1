@@ -169,7 +169,7 @@ void RBTree::loadFromFile(std::string FileName)
 		myfile.close();
 	}
 	else {
-		throw "Wyst¹pi³ problem z wczytaniem danych z pliku";
+		throw exception("Wyst¹pi³ problem z wczytaniem danych z pliku");
 	}
 }
 
