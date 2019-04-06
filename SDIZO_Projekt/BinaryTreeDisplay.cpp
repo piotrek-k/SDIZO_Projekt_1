@@ -21,7 +21,7 @@ int BinaryTreeDisplay::_print_t(RBMember *tree, int is_left, int offset, int dep
 	char b[20];
 	int width = 5;
 
-	if (!tree) return 0;
+	if (tree->isNull()) return 0;
 
 	sprintf_s(b, "(%03d)", tree->value);
 

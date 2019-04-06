@@ -33,10 +33,10 @@ void List::loadFromFile(std::string FileName)
 			}
 			myfile.close();
 		}
-		catch (std::invalid_argument& e) {
+		catch (std::invalid_argument & e) {
 			return;
 		}
-		catch (const exception& e) {
+		catch (const exception & e) {
 			throw exception("Wystapil problem z wczytaniem danych z pliku");
 		}
 	}
@@ -96,7 +96,7 @@ void List::removeElementByValue(int value)
 		}
 
 		if (elem->value == value) {
-			if (elem->prevValue != nullptr && a != getDeclaredSize()-1)
+			if (elem->prevValue != nullptr && a != getDeclaredSize() - 1)
 				elem->prevValue->nextValue = elem->nextValue;
 			if (elem->prevValue != nullptr && a != 0)
 				elem->nextValue->prevValue = elem->prevValue;
@@ -125,21 +125,23 @@ void List::addElement(int value)
 	count++;
 }
 
-void List::display(ostream& stream)
+void List::display(ostream & stream)
 {
 	stream << "Wyswietlanie listy. Zadeklarowana wielkosc: " << getDeclaredSize() << endl;
-	ListMember* lm = firstValue;
-	stream << lm->value << " ";
-	for (int a = 0; a < count - 1; a++) {
-		lm = lm->prevValue;
+	if (getDeclaredSize() > 0) {
+		ListMember* lm = firstValue;
 		stream << lm->value << " ";
-	}
+		for (int a = 0; a < count - 1; a++) {
+			lm = lm->prevValue;
+			stream << lm->value << " ";
+		}
 
-	stream << endl;
-	stream << lm->value << " ";
-	for (int a = 0; a < count - 1; a++) {
-		lm = lm->nextValue;
+		stream << endl;
 		stream << lm->value << " ";
+		for (int a = 0; a < count - 1; a++) {
+			lm = lm->nextValue;
+			stream << lm->value << " ";
+		}
 	}
 }
 
@@ -152,7 +154,7 @@ void List::generateRandom(int size, int range)
 	firstValue = newFirstValue;
 
 	ListMember* lastValue = firstValue;
-	for (int a = 0; a < size-1; a++) {
+	for (int a = 0; a < size - 1; a++) {
 		ListMember* newValue = new ListMember();
 		newValue->value = rand() % range;
 
@@ -181,7 +183,7 @@ int List::getDeclaredSize()
 	return count;
 }
 
-ListMember * List::getFirstValue()
+ListMember* List::getFirstValue()
 {
 	return firstValue;
 }
