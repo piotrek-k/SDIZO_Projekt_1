@@ -40,6 +40,9 @@ void Heap::loadFromFile(std::string FileName)
 			throw exception("Wystapil problem z otworzeniem pliku o podanej nazwie");
 		}
 	}
+	catch (std::invalid_argument& e) {
+		return;
+	}
 	catch (const exception& e) {
 		throw exception("Wystapil problem z wczytaniem danych z pliku");
 	}

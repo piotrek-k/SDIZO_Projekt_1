@@ -57,6 +57,9 @@ void Table::loadFromFile(string FileName)
 			}
 			myfile.close();
 		}
+		catch (std::invalid_argument& e) {
+			return;
+		}
 		catch (const exception& e) {
 			throw exception("Wystapil problem z wczytaniem danych z pliku");
 		}
@@ -88,10 +91,19 @@ bool Table::findValue(int val)
 /// <param name="value"></param>
 void Table::addElement(int index, int value)
 {
+	if (index > getDeclaredSize()) {
+		throw exception("podano nieprawidlowy index");
+	}
 	int newSize = this->getDeclaredSize() + 1;
 	int* newtab = new int[newSize];
+	for (int a = 0; a < newSize; a++) {
+		newtab[a] = 0;
+	}
 	int oldIndex = 0;
 	for (int a = 0; a < newSize; a++) {
+		/*if (a >= getDeclaredSize()) {
+			break;
+		}*/
 		if (index == a) {
 			newtab[a] = value;
 		}
@@ -127,6 +139,10 @@ void Table::addElementAtTheEnd(int value)
 /// <param name="index"></param>
 void Table::removeElement(int index)
 {
+	if (index >= getDeclaredSize()) {
+		return;
+	}
+
 	int newSize = this->getDeclaredSize() - 1;
 	int* newtab = new int[newSize];
 	int oldIndex = 0;

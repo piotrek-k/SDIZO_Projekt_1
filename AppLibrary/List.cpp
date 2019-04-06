@@ -33,6 +33,9 @@ void List::loadFromFile(std::string FileName)
 			}
 			myfile.close();
 		}
+		catch (std::invalid_argument& e) {
+			return;
+		}
 		catch (const exception& e) {
 			throw exception("Wystapil problem z wczytaniem danych z pliku");
 		}
@@ -126,9 +129,17 @@ void List::display(ostream& stream)
 {
 	stream << "Wyswietlanie listy. Zadeklarowana wielkosc: " << getDeclaredSize() << endl;
 	ListMember* lm = firstValue;
+	stream << lm->value << " ";
 	for (int a = 0; a < count - 1; a++) {
-		stream << lm->value << " ";
 		lm = lm->prevValue;
+		stream << lm->value << " ";
+	}
+
+	stream << endl;
+	stream << lm->value << " ";
+	for (int a = 0; a < count - 1; a++) {
+		lm = lm->nextValue;
+		stream << lm->value << " ";
 	}
 }
 

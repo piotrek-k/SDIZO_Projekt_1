@@ -1,0 +1,129 @@
+Wersja z Floydem
+         11
+    7        10
+ 6    7   8    9
+1 5
+
+--usun¹æ 11
+         10
+    7        9
+ 6    7   8    6
+1 
+
+--usun¹æ 1
+
+         10
+    7        9
+ 6    7   8    6 
+
+
+--usun¹æ 9
+
+         10
+    7        8
+ 6    7   6     
+
+----dodaæ 11
+         11
+    7        10
+ 6    7   6     8
+
+
+----dodaæ 12
+          12
+     11        10
+  7    7   6     8
+6
+
+
+
+
+
+
+heap1.txt - dane z æwiczenia z ktorego studenci tworz¹ ci¹g
+         11
+     10      9
+   7   6    7 8
+  1 5  
+
+heap2.txt
+               50
+      47                   10
+    33    32            7      8
+ 31  30  29 27        3  4   5   6
+29 28
+
+usunac 7
+==============================
+wczytujemy BST1
+          18
+    7            20
+ 4     12              28
+  5   8   14         26
+
+dodajemy 10
+
+          18
+    7            20
+ 4     12              28
+  5   8   14         26
+       10
+
+dodajemy 24
+
+          18
+    7            20
+ 4     12              28
+  5   8   14         26
+       10          24 
+
+dodajemy 2
+
+          18
+    7            20
+ 4     12              28
+  5  8   14         26
+ 2     10          24 
+
+
+usuwamy 7 nastepnikiem
+          18
+    8            20
+ 4     12              28
+  5  10  14         26
+ 2                24 
+
+
+
+usuwamy 7 poprzednikiem
+          18
+    5            20
+ 4     12              28
+  2  8   14         26
+       10          24 
+
+=============================
+wczytujemy drzewo bst2
+   20
+15      30
+     25    40
+  23   28
+
+równowa¿ymy
+         25
+    20       30
+  15  23    28 40
+
+==============================================
+https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
+
+https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
+
+
+                1
+            5        8
+         6    7    9  10
+       7  11
+
+
+

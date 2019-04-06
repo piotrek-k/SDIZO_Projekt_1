@@ -150,6 +150,7 @@ RBMember * RBTree::treeSuccessor(RBMember * node)
 /// <param name="FileName"></param>
 void RBTree::loadFromFile(std::string FileName)
 {
+	root = new RBMember();
 	string line;
 	ifstream myfile(FileName);
 	bool firstLine = true;
@@ -157,7 +158,13 @@ void RBTree::loadFromFile(std::string FileName)
 	{
 		while (getline(myfile, line))
 		{
-			int number = stoi(line);
+			int number = 0;
+			try {
+				number = stoi(line);
+			}
+			catch (std::invalid_argument& e) {
+				break;
+			}
 			if (firstLine) {
 				firstLine = false;
 				//count = number;
