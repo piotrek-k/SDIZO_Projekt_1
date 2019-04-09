@@ -140,7 +140,7 @@ void Table::addElementAtTheEnd(int value)
 void Table::removeElement(int index)
 {
 	if (index >= getDeclaredSize()) {
-		return;
+		throw exception("index wykracza poza zakres tablicy");
 	}
 
 	int newSize = this->getDeclaredSize() - 1;

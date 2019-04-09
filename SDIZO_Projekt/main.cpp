@@ -35,6 +35,23 @@ void displayMenu(string info, bool isLoaded)
 	cout << "Podaj opcje:";
 }
 
+// cin działa w nieprzewidywalny sposób jeśli podamy
+// wartość złego typu na strumień wejściowy
+// funkcja eliminuje ten problem
+void clearCinAfterError() {
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cin.sync();
+}
+
+// funkcja sprawdza czy dane wejściowe są w porządku
+// jeśli nie, wyrzuca wyjątek
+void validateCin() {
+	if (cin.fail()) {
+		throw exception("Podana wartosc nieprawidlowa");
+	}
+}
+
 void menu_table()
 {
 	char opt; //wybrana opcja
@@ -61,6 +78,7 @@ void menu_table()
 			case '2': //tutaj usuwanie elemenu z tablicy
 				cout << " podaj index:";
 				cin >> index;
+				validateCin();
 				myTab.removeElement(index);
 				myTab.display(cout);
 				break;
@@ -71,13 +89,16 @@ void menu_table()
 				cout << " podaj wartosc:";
 				cin >> value;
 
+				validateCin();
 				myTab.addElement(index, value);
 				myTab.display(cout);
+
 				break;
 
 			case '4': //tutaj znajdowanie elemetu w tablicy
 				cout << " podaj wartosc:";
 				cin >> value;
+				validateCin();
 				if (myTab.findValue(value))
 					cout << "podana wartosc jest w tablicy";
 				else
@@ -87,6 +108,7 @@ void menu_table()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow tablicy:";
 				cin >> value;
+				validateCin();
 				myTab.generateRandom(value, 10);
 				myTab.display(cout);
 				break;
@@ -101,8 +123,9 @@ void menu_table()
 				break;
 			}
 		}
-		catch (const std::exception& e) {
+		catch (const std::exception & e) {
 			cout << "program zwrocil blad: " << e.what() << endl;
+			clearCinAfterError();
 		}
 
 	} while (opt != '0');
@@ -134,6 +157,7 @@ void menu_list()
 			case '2': //tutaj usuwanie elemenu z tablicy
 				cout << " podaj wartosc elementu do usunieca:";
 				cin >> value;
+				validateCin();
 				myTab.removeElementByValue(value);
 				myTab.display(cout);
 				break;
@@ -143,14 +167,16 @@ void menu_list()
 				cin >> index;*/
 				cout << " podaj wartosc:";
 				cin >> value;
-
+				validateCin();
 				myTab.addElement(value);
 				myTab.display(cout);
+
 				break;
 
 			case '4': //tutaj znajdowanie elemetu w tablicy
 				cout << " podaj wartosc:";
 				cin >> value;
+				validateCin();
 				if (myTab.findValue(value))
 					cout << "podana wartosc jest w tablicy";
 				else
@@ -160,6 +186,7 @@ void menu_list()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow tablicy:";
 				cin >> value;
+				validateCin();
 				myTab.generateRandom(value, 10);
 				myTab.display(cout);
 				break;
@@ -173,8 +200,9 @@ void menu_list()
 				break;
 			}
 		}
-		catch (const std::exception& e) {
+		catch (const std::exception & e) {
 			cout << "Program zwrocil blad: " << e.what() << endl;
+			clearCinAfterError();
 		}
 
 	} while (opt != '0');
@@ -206,6 +234,7 @@ void menu_heap()
 			case '2': //tutaj usuwanie elemenu z kopca
 				cout << " podaj index:";
 				cin >> index;
+				validateCin();
 				myTab.removeElementAtIndex(index);
 				myTab.display(cout);
 				break;
@@ -213,7 +242,7 @@ void menu_heap()
 			case '3': //tutaj dodawanie elemetu do kopca
 				cout << " podaj wartosc:";
 				cin >> value;
-
+				validateCin();
 				myTab.addElement(value);
 				myTab.display(cout);
 				break;
@@ -221,6 +250,7 @@ void menu_heap()
 			case '4': //tutaj znajdowanie elemetu w tablicy
 				cout << " podaj wartosc:";
 				cin >> value;
+				validateCin();
 				if (myTab.findValue(value))
 					cout << "podana wartosc jest w kopcu";
 				else
@@ -230,6 +260,7 @@ void menu_heap()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow kopca:";
 				cin >> value;
+				validateCin();
 				myTab.generateRandom(value, 10);
 				myTab.display(cout);
 				break;
@@ -245,10 +276,12 @@ void menu_heap()
 				break;
 			}
 		}
-		catch (const std::exception& e) {
+		catch (const std::exception & e) {
 			cout << "Program zwrocil blad: " << e.what() << endl;
+			clearCinAfterError();
 		}
 
+		clearCinAfterError();
 	} while (opt != '0');
 }
 
@@ -278,6 +311,7 @@ void menu_rbtree()
 			case '2': //tutaj usuwanie elemenu z kopca
 				cout << " podaj index:";
 				cin >> index;
+				validateCin();
 				rbtree.removeElement(index);
 				rbtree.display(cout);
 				break;
@@ -285,6 +319,7 @@ void menu_rbtree()
 			case '3': //tutaj dodawanie elemetu do kopca
 				cout << " podaj wartosc:";
 				cin >> value;
+				validateCin();
 				rbtree.rbInsert(value);
 				rbtree.display(cout);
 				break;
@@ -292,6 +327,7 @@ void menu_rbtree()
 			case '4': //tutaj znajdowanie elemetu w tablicy
 				cout << " podaj wartosc:";
 				cin >> value;
+				validateCin();
 				if (rbtree.findValue(value)->isNotNull())
 					cout << "podana wartosc jest w kopcu";
 				else
@@ -301,6 +337,7 @@ void menu_rbtree()
 			case '5':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow kopca:";
 				cin >> value;
+				validateCin();
 				rbtree.generateRandom(value, 10);
 				rbtree.display(cout);
 				break;
@@ -315,8 +352,9 @@ void menu_rbtree()
 				break;
 			}
 		}
-		catch (const std::exception& e) {
+		catch (const std::exception & e) {
 			cout << "Program zwrocil blad: " << e.what() << endl;
+			clearCinAfterError();
 		}
 
 	} while (opt != '0');

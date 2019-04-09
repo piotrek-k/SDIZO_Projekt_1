@@ -164,7 +164,7 @@ bool Heap::indexIsValid(int index)
 /// <returns></returns>
 bool Heap::searchFromIndex(int val, int index)
 {
-	if (index > this->count) {
+	if (index >= this->getDeclaredSize()) {
 		return false;
 	}
 
@@ -202,6 +202,9 @@ void Heap::addElement(int key)
 /// <param name="index"></param>
 void Heap::removeElementAtIndex(int index)
 {
+	if (index >= getDeclaredSize()) {
+		throw exception("Podany indeks jest poza zakresem tablicy");
+	}
 	tab[index] = tab[getDeclaredSize() - 1];
 	changeDeclaredSize(getDeclaredSize() - 1);
 	heapify(index);
