@@ -127,7 +127,7 @@ void menu_table()
 			cout << "program zwrocil blad: " << e.what() << endl;
 			clearCinAfterError();
 		}
-
+		clearCinAfterError();
 	} while (opt != '0');
 }
 
@@ -204,7 +204,7 @@ void menu_list()
 			cout << "Program zwrocil blad: " << e.what() << endl;
 			clearCinAfterError();
 		}
-
+		clearCinAfterError();
 	} while (opt != '0');
 }
 
@@ -298,6 +298,7 @@ void menu_rbtree()
 			displayMenu("--- DRZEWO CZERWONO-CZARNE ---", isLoaded);
 			//opt = _getche();
 			cin >> opt;
+			validateCin();
 			cout << endl;
 			switch (opt) {
 			case '1': //tutaj wczytytwanie  kopca z pliku
@@ -356,7 +357,7 @@ void menu_rbtree()
 			cout << "Program zwrocil blad: " << e.what() << endl;
 			clearCinAfterError();
 		}
-
+		clearCinAfterError();
 	} while (opt != '0');
 }
 
@@ -376,6 +377,7 @@ int main(int argc, char* argv[])
 		cout << "Podaj opcje:";
 		//option = _getche();
 		cin >> option;
+		validateCin();
 		cout << endl;
 
 		switch (option) {
@@ -398,8 +400,10 @@ int main(int argc, char* argv[])
 		case '5':
 			tC.Start(210, 10, 50, 100, cout);
 			break;
+		default:
+			cout << "Nie znaleziono takiej opcji";
 		}
-
+		clearCinAfterError();
 	} while (option != '0');
 
 
