@@ -146,7 +146,7 @@ void menu_list()
 			cin >> opt;
 			cout << endl;
 			switch (opt) {
-			case '1': //tutaj wczytytwanie  tablicy z pliku
+			case '1': //tutaj wczytytwanie  listy z pliku
 				cout << " Podaj nazwe zbioru:";
 				cin >> fileName;
 				myTab.loadFromFile(fileName);
@@ -154,7 +154,7 @@ void menu_list()
 				isLoaded = true;
 				break;
 
-			case '2': //tutaj usuwanie elemenu z tablicy
+			case '2': //tutaj usuwanie elemenu z listy
 				cout << " podaj wartosc elementu do usunieca:";
 				cin >> value;
 				validateCin();
@@ -162,7 +162,7 @@ void menu_list()
 				myTab.display(cout);
 				break;
 
-			case '3': //tutaj dodawanie elemetu do tablicy
+			case '3': //tutaj dodawanie elemetu do listy
 				cout << " podaj index:";
 				cin >> index;
 				cout << " podaj wartosc:";
@@ -174,18 +174,18 @@ void menu_list()
 
 				break;
 
-			case '4': //tutaj znajdowanie elemetu w tablicy
+			case '4': //tutaj znajdowanie elemetu w listy
 				cout << " podaj wartosc:";
 				cin >> value;
 				validateCin();
 				if (myTab.findValue(value))
-					cout << "podana wartosc jest w tablicy";
+					cout << "podana wartosc jest w liscie";
 				else
-					cout << "podanej wartosci NIE ma w tablicy";
+					cout << "podanej wartosci NIE ma w liscie";
 				break;
 
 			case '5':  //tutaj generowanie  tablicy
-				cout << "Podaj ilosc elementow tablicy:";
+				cout << "Podaj ilosc elementow listy:";
 				cin >> value;
 				validateCin();
 				myTab.generateRandom(value, 10);
