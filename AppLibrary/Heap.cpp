@@ -131,6 +131,24 @@ void Heap::heapify(int index)
 }
 
 /// <summary>
+/// sprawdŸ czy element jest poprawnie u³o¿ony wzglêdem parenta.
+/// jeœli nie, zamieñ ich wartoœci
+/// </summary>
+/// <param name="val"></param>
+/// <returns></returns>
+void Heap::validateParent(int index)
+{
+	int indexOfParent = this->getIndexOfParent(index);
+	int elemValue = this->tab[index];
+	int parentValue = this->tab[indexOfParent];
+	if (indexOfParent >= 0 && indexOfParent != index && elemValue > parentValue) {
+		this->tab[index] = parentValue;
+		this->tab[indexOfParent] = elemValue;
+		validateParent(indexOfParent);
+	}
+}
+
+/// <summary>
 /// sprawdŸ czy wartoœæ jest w kopcu
 /// </summary>
 /// <param name="val"></param>
@@ -208,6 +226,7 @@ void Heap::removeElementAtIndex(int index)
 	tab[index] = tab[getDeclaredSize() - 1];
 	changeDeclaredSize(getDeclaredSize() - 1);
 	heapify(index);
+	validateParent(index);
 }
 
 void Heap::removeElementByValue(int value)

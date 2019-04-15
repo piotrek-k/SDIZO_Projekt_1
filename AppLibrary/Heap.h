@@ -17,6 +17,7 @@ public:
 
 	void buildHeap();
 	void heapify(int index);
+	void validateParent(int index);
 
 	void populateFromArray(int * arr, int size);
 	void addElement(int key);
