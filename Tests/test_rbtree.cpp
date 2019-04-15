@@ -57,7 +57,11 @@ TEST(RBTreeTest, AgainstBst2) {
 	ASSERT_TRUE(rb.check(rb.root));
 	EXPECT_ANY_THROW(rb.removeElement(2222));
 	ASSERT_TRUE(rb.check(rb.root));
-	rb.removeElement(15);
+
+	ASSERT_TRUE(rb.root->value == 20);
+	ASSERT_TRUE(rb.root->rightNode->value == 28);
+	ASSERT_TRUE(rb.root->leftNode->value == 15);
+	ASSERT_TRUE(rb.root->rightNode->leftNode->value == 25);
 }
 
 TEST(RBTreeTest, BST_Insertion) {
@@ -174,15 +178,15 @@ TEST(RBTreeTest, treeSuccessor) {
 	ASSERT_EQ(m->value, 11);
 }
 
-bool treeCorrect(RBMember* m) {
-	if (m->leftNode->isNull() && m->rightNode->isNull()) {
-		return true;
-	}
-	if (m->color == m->leftNode->color || m->color == m->rightNode->color) {
-		return false;
-	}
-	return treeCorrect(m->leftNode) && treeCorrect(m->rightNode);
-}
+//bool treeCorrect(RBMember* m) {
+//	if (m->leftNode->isNull() && m->rightNode->isNull()) {
+//		return true;
+//	}
+//	if (m->color == m->leftNode->color || m->color == m->rightNode->color) {
+//		return false;
+//	}
+//	return treeCorrect(m->leftNode) && treeCorrect(m->rightNode);
+//}
 
 TEST(RBTreeTest, deleteElement) {
 	RBTree* rb = buildRBTreeFromBook();
@@ -206,7 +210,7 @@ TEST(RBTreeTest, deleteElement) {
 	EXPECT_TRUE(objToDel2 == NULL);
 	EXPECT_TRUE(objToDel3 == NULL);
 	//sprawdz czy wlasnosci zachowane
-	EXPECT_TRUE(treeCorrect(rb->root));
+	EXPECT_TRUE(rb->check(rb->root));
 }
 
 TEST(RBTreeTest, findValue) {
