@@ -34,6 +34,32 @@ RBTree* buildRBTreeFromBook() {
 	return rb;
 }
 
+TEST(RBTreeTest, AgainstBst2) {
+	RBTree rb = RBTree();
+	rb.root = new RBMember();
+	//rb.loadFromFile("../Tests/ExampleFilesWithData/bst3.txt");
+	//rb.rbInsert(7);
+	rb.rbInsert(20);
+	rb.rbInsert(15);
+	rb.rbInsert(30);
+	rb.rbInsert(25);
+	rb.rbInsert(40);
+	rb.rbInsert(23);
+	rb.rbInsert(28);
+
+
+	ASSERT_TRUE(rb.check(rb.root));
+	rb.removeElement(30);
+	ASSERT_TRUE(rb.check(rb.root));
+	rb.removeElement(23);
+	ASSERT_TRUE(rb.check(rb.root));
+	rb.removeElement(40);
+	ASSERT_TRUE(rb.check(rb.root));
+	EXPECT_ANY_THROW(rb.removeElement(2222));
+	ASSERT_TRUE(rb.check(rb.root));
+	rb.removeElement(15);
+}
+
 TEST(RBTreeTest, BST_Insertion) {
 	RBTree rb = RBTree();
 

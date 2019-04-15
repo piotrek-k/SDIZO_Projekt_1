@@ -333,10 +333,10 @@ void menu_rbtree()
 				break;
 
 			case '2': //tutaj usuwanie elemenu z kopca
-				cout << " podaj index:";
-				cin >> index;
+				cout << " podaj wartosc:";
+				cin >> value;
 				validateCin();
-				rbtree.removeElement(index);
+				rbtree.removeElement(value);
 				rbtree.display(cout);
 				break;
 

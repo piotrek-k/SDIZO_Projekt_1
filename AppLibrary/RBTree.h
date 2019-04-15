@@ -21,5 +21,6 @@ public:
 	RBMember* removeElement(RBMember* value);
 	void RBDeleteFixup(RBMember* x);
 	void display(std::ostream & stream);
+	bool check(RBMember* startNode);
 };
 

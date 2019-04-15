@@ -49,66 +49,127 @@ RBMember* RBTree::treeInsert(int value)
 /// "Obrót" drzewa w lewo
 /// </summary>
 /// <param name="node"></param>
-void RBTree::leftRotate(RBMember * node)
-{
-	RBMember* y = node->rightNode;
-	node->rightNode = y->leftNode;
+void RBTree::leftRotate(RBMember* b) {
+	RBMember* c = b->rightNode;
 
-	if (y->leftNode->isNotNull()) {
-		y->leftNode->parentNode = node;
-	}
-	y->parentNode = node->parentNode;
-	if (node->parentNode->isNull()) {
-		root = y;
-	}
-	else if (node == node->parentNode->leftNode) {
-		node->parentNode->leftNode = y;
-	}
-	else {
-		node->parentNode->rightNode = y;
-	}
+	if (c->isNotNull()) {
+		if (b == root) {
+			root = c;
+		}
+		else {
+			c->parentNode = b->parentNode;
+			if (b == b->parentNode->leftNode) {
+				b->parentNode->leftNode = c;
+			}
+			else {
+				b->parentNode->rightNode = c;
+			}
+		}
 
-	y->leftNode = node;
-	node->parentNode = y;
+		if (c->leftNode->isNotNull()) {
+			RBMember* f = c->leftNode;
+			b->rightNode = f;
+			f->parentNode = b;
+		}
+		else {
+			b->rightNode = new RBMember();
+		}
+
+		c->leftNode = b;
+		b->parentNode = c;
+	}
 }
+
+void RBTree::rightRotate(RBMember* b) {
+	RBMember* a = b->leftNode;
+
+	if (a->isNotNull()) {
+		if (b == root) {
+			root = a;
+		}
+		else {
+			a->parentNode = b->parentNode;
+			if (b == b->parentNode->leftNode) {
+				b->parentNode->leftNode = a;
+			}
+			else {
+				b->parentNode->rightNode = a;
+			}
+		}
+
+		if (a->rightNode->isNotNull()) {
+			RBMember* e = a->rightNode;
+			b->leftNode = e;
+			e->parentNode = b;
+		}
+		else {
+			b->leftNode = new RBMember();
+		}
+
+		a->rightNode = b;
+		b->parentNode = a;
+	}
+}
+//void RBTree::leftRotate(RBMember * node)
+//{
+//	RBMember* y = node->rightNode;
+//	node->rightNode = y->leftNode;
+//
+//	if (y->leftNode->isNotNull()) {
+//		y->leftNode->parentNode = node;
+//	}
+//	y->parentNode = node->parentNode;
+//	if (node->parentNode->isNull()) {
+//		root = y;
+//	}
+//	else if (node == node->parentNode->leftNode) {
+//		node->parentNode->leftNode = y;
+//	}
+//	else {
+//		node->parentNode->rightNode = y;
+//	}
+//
+//	y->leftNode = node;
+//	node->parentNode = y;
+//}
 
 /// <summary>
 /// "Obrót" drzewa w prawo
 /// </summary>
 /// <param name="y"></param>
-void RBTree::rightRotate(RBMember * y)
-{
-	//zgodnie z rysunkiem, Cormen strona 306
-
-	RBMember* x = y->leftNode;
-
-	//alpha
-	//zostaje
-
-	//beta
-	y->leftNode = x->rightNode;
-	x->rightNode->parentNode = y;
-
-	//gamma
-	//zostaje
-
-	if (y->parentNode->isNotNull()) {
-		x->parentNode = y->parentNode;
-	}
-	else {
-		x->parentNode = new RBMember();
-		root = x;
-	}
-
-	if (y->parentNode->rightNode == y) {
-		y->parentNode->rightNode = x;
-	}
-	else {
-		y->parentNode->leftNode = x;
-	}
-	x->rightNode = y;
-
-}
+//void RBTree::rightRotate(RBMember * y)
+//{
+//	//zgodnie z rysunkiem, Cormen strona 306
+//
+//	RBMember* x = y->leftNode;
+//
+//	//alpha
+//	//zostaje
+//
+//	//beta
+//	y->leftNode = x->rightNode;
+//	x->rightNode->parentNode = y;
+//
+//	//gamma
+//	//zostaje
+//
+//	if (y->parentNode->isNotNull()) {
+//		x->parentNode = y->parentNode;
+//	}
+//	else {
+//		x->parentNode = new RBMember();
+//		root = x;
+//	}
+//
+//	if (y->parentNode->rightNode == y) {
+//		y->parentNode->rightNode = x;
+//	}
+//	else {
+//		y->parentNode->leftNode = x;
+//	}
+//	x->rightNode = y;
+//
+//}
 
 /// <summary>
 /// Minimalna wartoœæ drzewa RB
@@ -369,6 +430,8 @@ RBMember* RBTree::removeElement(RBMember* z)
 
 	if (y != z) {
 		z->value = y->value;
+		z->color = y->color;
+		//przepisaæ kolor te¿?
 	}
 
 	if (y->color == Black) {
@@ -456,4 +519,22 @@ void RBTree::RBDeleteFixup(RBMember * x)
 /// <param name="stream"></param>
 void RBTree::display(std::ostream & stream)
 {
+}
+
+bool RBTree::check(RBMember* startNode)
+{
+	bool output = true;
+	if (startNode->isNull()) {
+		return true;
+	}
+	if (startNode->color == Red && (startNode->leftNode->color == Red || startNode->rightNode->color == Red)) {
+		output = false;
+	}
+	if (startNode->value < startNode->leftNode->value && startNode->leftNode->isNotNull()) {
+		output = false;
+	}
+	if (startNode->value > startNode->rightNode->value && startNode->rightNode->isNotNull()) {
+		output = false;
+	}
+	return (output && check(startNode->leftNode) && check(startNode->rightNode));
 }
