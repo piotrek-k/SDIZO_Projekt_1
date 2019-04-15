@@ -192,7 +192,7 @@ int* List::toArray()
 {
 	int* newArr = new int[count];
 	ListMember* lm = firstValue;
-	for (int a = count - 1; a >= 0; a--) {
+	for (int a = 0; a < getDeclaredSize(); a++) {
 		newArr[a] = lm->value;
 		lm = lm->prevValue;
 	}

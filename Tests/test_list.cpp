@@ -19,7 +19,8 @@
 TEST(ListTest_Standalone, LoadingFromFileWorksProperly) {
 	List list = List();
 	list.loadFromFile("../Tests/ExampleFilesWithData/ValuesForTable.txt");
-	int endArray[] = { 0, -2, 5, 99, 124, 1, 2 };
+	//int endArray[] = { 0, -2, 5, 99, 124, 1, 2 };
+	int endArray[] = { 2, 1, 124, 99, 5, -2, 0 };
 	//int endKeyValues[] = { 0, 1, 2, 3, 4, 5, 6 };
 	int* generatedArr = list.toArray();
 
@@ -36,7 +37,7 @@ TEST(ListTest_Standalone, LoadingFromFileWorksProperly) {
 	}*/
 }
 TEST(ListTest_Standalone, AddedValuesToList) {
-	int endArray[] = { 5, 10, -22 };
+	int endArray[] = { -22, 10, 5 };
 	List list = List();
 	list.addElementAsFirst(5);
 	list.addElementAsFirst(10);
@@ -50,7 +51,7 @@ TEST(ListTest_Standalone, AddedValuesToList) {
 }
 
 TEST(ListTest_Standalone, AddedValuesAtIndex) {
-	int endArray[] = { 5, 55, 10, -22 };
+	int endArray[] = { -22, 55, 10, 5 }; //od konca
 	List list = List();
 	list.addElementAsFirst(5);
 	list.addElementAsFirst(10);
@@ -65,7 +66,8 @@ TEST(ListTest_Standalone, AddedValuesAtIndex) {
 }
 
 TEST(ListTest_Standalone, RemoveValueAndConsistencyCheck) {
-	int endArray[] = { 88, 234, -22 };
+	//int endArray[] = { 88, 234, -22 };
+	int endArray[] = { -22, 234, 88 };
 	List list = List();
 	list.addElementAsFirst(5);
 	list.addElementAsFirst(10);
