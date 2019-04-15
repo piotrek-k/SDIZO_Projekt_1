@@ -200,8 +200,11 @@ TEST(RBTreeTest, deleteElement) {
 	ASSERT_TRUE(objToDel3 != NULL);
 	//rb->removeElement(jakis_element);
 	rb->removeElement(objToDel1);
+	EXPECT_TRUE(rb->check(rb->root));
 	rb->removeElement(objToDel2);
+	EXPECT_TRUE(rb->check(rb->root));
 	rb->removeElement(objToDel3);
+	EXPECT_TRUE(rb->check(rb->root));
 	//sprobuj znowu znalezc ten element
 	objToDel1 = rb->findValue(11);
 	objToDel2 = rb->findValue(7);
@@ -210,7 +213,7 @@ TEST(RBTreeTest, deleteElement) {
 	EXPECT_TRUE(objToDel2 == NULL);
 	EXPECT_TRUE(objToDel3 == NULL);
 	//sprawdz czy wlasnosci zachowane
-	EXPECT_TRUE(rb->check(rb->root));
+	//EXPECT_TRUE(rb->check(rb->root));
 }
 
 TEST(RBTreeTest, findValue) {

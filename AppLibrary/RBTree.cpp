@@ -430,8 +430,7 @@ RBMember* RBTree::removeElement(RBMember* z)
 
 	if (y != z) {
 		z->value = y->value;
-		z->color = y->color;
-		//przepisaæ kolor te¿?
+		//z->color = y->color;
 	}
 
 	if (y->color == Black) {
@@ -511,6 +510,8 @@ void RBTree::RBDeleteFixup(RBMember * x)
 		}
 
 	}
+
+	x->color = Black;
 }
 
 /// <summary>
