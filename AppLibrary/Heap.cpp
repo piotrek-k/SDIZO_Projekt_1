@@ -210,6 +210,24 @@ void Heap::removeElementAtIndex(int index)
 	heapify(index);
 }
 
+void Heap::removeElementByValue(int value)
+{
+	int foundIndex = -1;
+	for (int a = 0; a < this->getDeclaredSize(); a++) {
+		if (tab[a] == value) {
+			foundIndex = a;
+			break;
+		}
+	}
+
+	if (foundIndex != -1) {
+		this->removeElementAtIndex(foundIndex);
+	}
+	else {
+		throw exception("Nie znaleziono podanej wartoœci");
+	}
+}
+
 /// <summary>
 /// Zwraca ci¹g znaków reprezentuj¹cy kopiec
 /// </summary>

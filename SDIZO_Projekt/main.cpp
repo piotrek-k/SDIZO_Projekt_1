@@ -219,7 +219,21 @@ void menu_heap()
 
 	do {
 		try {
-			displayMenu("--- KOPIEC ---", isLoaded);
+			//displayMenu("--- KOPIEC ---", isLoaded);
+			cout << endl;
+			cout << "--- KOPIEC ---" << endl;
+			cout << "1.Wczytaj z pliku" << endl;
+			//if (isLoaded) {
+			cout << "2.Usun element o podanym indeksie" << endl;
+			cout << "3.Usun wartosc" << endl;
+			cout << "4.Dodaj" << endl;
+			cout << "5.Znajdz" << endl;
+			cout << "6.Utworz losowo" << endl;
+			cout << "7.Wyswietl" << endl;
+			//}
+			cout << "0.Powrot do menu" << endl;
+			cout << "Podaj opcje:";
+
 			//opt = _getche();
 			cin >> opt;
 			cout << endl;
@@ -240,7 +254,15 @@ void menu_heap()
 				myTab.display(cout);
 				break;
 
-			case '3': //tutaj dodawanie elemetu do kopca
+			case '3': //tutaj usuwanie elemenu z kopca
+				cout << " podaj wartosc:";
+				cin >> value;
+				validateCin();
+				myTab.removeElementByValue(value);
+				myTab.display(cout);
+				break;
+
+			case '4': //tutaj dodawanie elemetu do kopca
 				cout << " podaj wartosc:";
 				cin >> value;
 				validateCin();
@@ -248,7 +270,7 @@ void menu_heap()
 				myTab.display(cout);
 				break;
 
-			case '4': //tutaj znajdowanie elemetu w tablicy
+			case '5': //tutaj znajdowanie elemetu w tablicy
 				cout << " podaj wartosc:";
 				cin >> value;
 				validateCin();
@@ -258,7 +280,7 @@ void menu_heap()
 					cout << "podanej wartosci NIE ma w kopcu";
 				break;
 
-			case '5':  //tutaj generowanie  tablicy
+			case '6':  //tutaj generowanie  tablicy
 				cout << "Podaj ilosc elementow kopca:";
 				cin >> value;
 				validateCin();
@@ -266,13 +288,13 @@ void menu_heap()
 				myTab.display(cout);
 				break;
 
-			case '6':  //tutaj wyswietlanie tablicy
+			case '7':  //tutaj wyswietlanie tablicy
 				myTab.display(cout);
 				cout << endl;
 				btd.print_t(&myTab);
 				break;
 
-			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
+			case '8': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 
 					  // mo�na sobie tu doda� w�asne case'y
 				break;
 			}
