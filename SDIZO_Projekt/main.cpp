@@ -328,7 +328,8 @@ void menu_rbtree()
 				cout << " Podaj nazwe zbioru:";
 				cin >> fileName;
 				rbtree.loadFromFile(fileName);
-				rbtree.display(cout);
+				//rbtree.display(cout);
+				btd.print(rbtree.root);
 				isLoaded = true;
 				break;
 
@@ -337,7 +338,8 @@ void menu_rbtree()
 				cin >> value;
 				validateCin();
 				rbtree.removeElement(value);
-				rbtree.display(cout);
+				//rbtree.display(cout);
+				btd.print(rbtree.root);
 				break;
 
 			case '3': //tutaj dodawanie elemetu do kopca
@@ -345,7 +347,8 @@ void menu_rbtree()
 				cin >> value;
 				validateCin();
 				rbtree.rbInsert(value);
-				rbtree.display(cout);
+				btd.print(rbtree.root);
+				//rbtree.display(cout);
 				break;
 
 			case '4': //tutaj znajdowanie elemetu w tablicy
@@ -363,12 +366,14 @@ void menu_rbtree()
 				cin >> value;
 				validateCin();
 				rbtree.generateRandom(value, 10);
-				rbtree.display(cout);
+				//rbtree.display(cout);
+				btd.print(rbtree.root);
 				break;
 
 			case '6':  //tutaj wyswietlanie tablicy
 				//rbtree.display(cout);
-				btd.print_t(rbtree.root);
+				//btd.print_t(rbtree.root);
+				btd.print(rbtree.root);
 				break;
 
 			case '7': //tutaj nasza funkcja do eksperyment�w (pomiary czas�w i generowanie daneych) - nie b�dzie testowana przez prowadz�cego 

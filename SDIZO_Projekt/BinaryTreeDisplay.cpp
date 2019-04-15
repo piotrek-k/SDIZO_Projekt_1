@@ -9,6 +9,10 @@
 
 BinaryTreeDisplay::BinaryTreeDisplay()
 {
+	cr = cl = cp = "  ";
+	cr[0] = 218; cr[1] = 196;
+	cl[0] = 192; cl[1] = 196;
+	cp[0] = 179;
 }
 
 
@@ -16,14 +20,53 @@ BinaryTreeDisplay::~BinaryTreeDisplay()
 {
 }
 
-int BinaryTreeDisplay::_print_t(RBMember *tree, int is_left, int offset, int depth, char s[20][255])
+// Wypisuje zawartoœæ drzewa
+//--------------------------
+void BinaryTreeDisplay::printRBT(string sp, string sn, RBMember* p)
 {
-	char b[20];
+	string t;
+
+	if (p->isNotNull())
+	{
+		t = sp;
+		if (sn == cr) t[t.length() - 2] = ' ';
+		printRBT(t + cp, cr, p->rightNode);
+
+		t = t.substr(0, sp.length() - 2);
+		if (p->color == Red) {
+			cout << t << sn << "R" << ":" << p->value << endl;
+		}
+		else {
+			cout << t << sn << "B" << ":" << p->value << endl;
+		}
+		
+
+		t = sp;
+		if (sn == cl) t[t.length() - 2] = ' ';
+		printRBT(t + cp, cl, p->leftNode);
+	}
+}
+
+// Wypisuje zawartoœæ drzewa
+//--------------------------
+void BinaryTreeDisplay::print(RBMember* root)
+{
+	printRBT("", "", root);
+}
+
+int BinaryTreeDisplay::_print_t(RBMember* tree, int is_left, int offset, int depth, char s[20][255])
+{
+	char b[22];
 	int width = 5;
 
 	if (tree->isNull()) return 0;
 
-	sprintf_s(b, "(%03d)", tree->value);
+	if (tree->color == Red) {
+		sprintf_s(b, "(%03d %c)", tree->value, 'R');
+	}
+	else {
+		sprintf_s(b, "(%03d %c)", tree->value, 'B');
+	}
 
 	int left = _print_t(tree->leftNode, 1, offset, depth + 1, s);
 	int right = _print_t(tree->rightNode, 0, offset + left + width, depth + 1, s);
@@ -52,7 +95,7 @@ int BinaryTreeDisplay::_print_t(RBMember *tree, int is_left, int offset, int dep
 	return left + width + right;
 }
 
-void BinaryTreeDisplay::print_t(RBMember *tree)
+void BinaryTreeDisplay::print_t(RBMember * tree)
 {
 	char s[20][255];
 	for (int i = 0; i < 20; i++)
@@ -64,7 +107,7 @@ void BinaryTreeDisplay::print_t(RBMember *tree)
 		printf("%s\n", s[i]);
 }
 
-int BinaryTreeDisplay::_print_t(Heap *tree, int index, int is_left, int offset, int depth, char s[20][255])
+int BinaryTreeDisplay::_print_t(Heap * tree, int index, int is_left, int offset, int depth, char s[20][255])
 {
 	char b[20];
 	int width = 5;
@@ -100,7 +143,7 @@ int BinaryTreeDisplay::_print_t(Heap *tree, int index, int is_left, int offset, 
 	return left + width + right;
 }
 
-void BinaryTreeDisplay::print_t(Heap *tree)
+void BinaryTreeDisplay::print_t(Heap * tree)
 {
 	char s[20][255];
 	for (int i = 0; i < 20; i++)
