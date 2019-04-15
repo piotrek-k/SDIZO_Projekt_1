@@ -128,7 +128,7 @@ void timeCounter::Start(int num, int stepSize, int numOfSearches, int numOfReps,
 		for (int b = 0; b < numOfReps; b++) {
 			StartNextMeasurement();
 			for (int a = 0; a < numOfElements; a++) {
-				myList->addElement(1);
+				myList->addElementAsFirst(1);
 			}
 			EndSingleMeasurement();
 		}

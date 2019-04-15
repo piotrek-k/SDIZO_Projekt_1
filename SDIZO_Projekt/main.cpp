@@ -163,12 +163,13 @@ void menu_list()
 				break;
 
 			case '3': //tutaj dodawanie elemetu do tablicy
-				/*cout << " podaj index:";
-				cin >> index;*/
+				cout << " podaj index:";
+				cin >> index;
 				cout << " podaj wartosc:";
 				cin >> value;
 				validateCin();
-				myTab.addElement(value);
+				myTab.addElementAtIndex(index, value);
+				//myTab.addElementAsFirst(value);
 				myTab.display(cout);
 
 				break;

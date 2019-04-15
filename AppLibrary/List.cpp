@@ -28,7 +28,7 @@ void List::loadFromFile(std::string FileName)
 					firstLine = false;
 				}
 				else {
-					this->addElement(number);
+					this->addElementAsFirst(number);
 				}
 			}
 			myfile.close();
@@ -63,27 +63,48 @@ bool List::findValue(int val)
 
 void List::addElementAtIndex(int index, int value)
 {
-	int indexCounter = this->count - 1;
+	if (index > this->getDeclaredSize()) {
+		throw exception("Podany indeks jest poza zakresem listy");
+	}
+	int indexCounter = 0;
 	ListMember* nextElem = this->firstValue;
-	while (nextElem) {
-		if (nextElem == NULL || indexCounter < 0) {
-			break;
-		}
+	ListMember* lastElem = NULL;
+	while (nextElem || indexCounter == this->getDeclaredSize()) {
 
 		if (indexCounter == index) {
 			ListMember* newElem = new ListMember();
 			newElem->value = value;
-			newElem->nextValue = nextElem;
-			newElem->prevValue = nextElem->prevValue;
-			if (nextElem->prevValue != NULL)
-				(nextElem->prevValue)->nextValue = newElem;
-			nextElem->prevValue = newElem;
+			if (nextElem != NULL) {
+				newElem->nextValue = nextElem->nextValue;
+				newElem->prevValue = nextElem;
+				if (nextElem->nextValue != NULL)
+					(nextElem->nextValue)->prevValue = newElem;
+				nextElem->nextValue = newElem;
+			}
+
+			if (indexCounter == this->getDeclaredSize()) {
+				newElem->nextValue = lastElem;
+				if (lastElem != NULL) {
+					lastElem->prevValue = newElem;
+				}
+			}
+
+			if (index == 0) {
+				this->firstValue = newElem;
+			}
+
 			this->count++;
 			return;
 		}
 
-		indexCounter--;
-		nextElem = nextElem->prevValue;
+		indexCounter++;
+		lastElem = nextElem;
+		if (nextElem != NULL && nextElem->prevValue != NULL) {
+			nextElem = nextElem->prevValue;
+		}
+		else {
+			nextElem = NULL;
+		}
 	}
 }
 
@@ -112,7 +133,7 @@ void List::removeElementByValue(int value)
 	}
 }
 
-void List::addElement(int value)
+void List::addElementAsFirst(int value)
 {
 	ListMember* newElem = new ListMember();
 	newElem->value = value;

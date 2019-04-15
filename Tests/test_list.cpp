@@ -38,9 +38,9 @@ TEST(ListTest_Standalone, LoadingFromFileWorksProperly) {
 TEST(ListTest_Standalone, AddedValuesToList) {
 	int endArray[] = { 5, 10, -22 };
 	List list = List();
-	list.addElement(5);
-	list.addElement(10);
-	list.addElement(-22);
+	list.addElementAsFirst(5);
+	list.addElementAsFirst(10);
+	list.addElementAsFirst(-22);
 	int* generatedArr = list.toArray();
 
 	EXPECT_EQ(list.getDeclaredSize(), 3);
@@ -52,9 +52,9 @@ TEST(ListTest_Standalone, AddedValuesToList) {
 TEST(ListTest_Standalone, AddedValuesAtIndex) {
 	int endArray[] = { 5, 55, 10, -22 };
 	List list = List();
-	list.addElement(5);
-	list.addElement(10);
-	list.addElement(-22);
+	list.addElementAsFirst(5);
+	list.addElementAsFirst(10);
+	list.addElementAsFirst(-22);
 	list.addElementAtIndex(1, 55);
 	int* generatedArr = list.toArray();
 
@@ -67,11 +67,11 @@ TEST(ListTest_Standalone, AddedValuesAtIndex) {
 TEST(ListTest_Standalone, RemoveValueAndConsistencyCheck) {
 	int endArray[] = { 88, 234, -22 };
 	List list = List();
-	list.addElement(5);
-	list.addElement(10);
-	list.addElement(88);
-	list.addElement(234);
-	list.addElement(-22);
+	list.addElementAsFirst(5);
+	list.addElementAsFirst(10);
+	list.addElementAsFirst(88);
+	list.addElementAsFirst(234);
+	list.addElementAsFirst(-22);
 	list.removeElementByValue(10);
 	list.removeElementByValue(10);
 	list.removeElementByValue(10);

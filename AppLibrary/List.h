@@ -13,7 +13,7 @@ public:
 	virtual bool findValue(int val);
 	void addElementAtIndex(int index, int value);
 	virtual void removeElementByValue(int value);
-	void addElement(int value);
+	void addElementAsFirst(int value);
 	void display(std::ostream & stream);
 	virtual void generateRandom(int size, int range);
 	int* toArray();
